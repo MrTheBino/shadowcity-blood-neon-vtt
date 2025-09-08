@@ -1,0 +1,12 @@
+<div class="{{cssClass}}" autocomplete="off">
+ <select name="system.assetType">
+    <option value="ally" {{#if (eq system.assetType "ally")}}selected{{/if}}>Ally</option>
+    <option value="contact" {{#if (eq system.assetType "contact")}}selected{{/if}}>Contact</option>
+    <option value="herd" {{#if (eq system.assetType "herd")}}selected{{/if}}>Herd</option>
+    <option value="influence" {{#if (eq system.assetType "influence")}}selected{{/if}}>Influence</option>
+    <option value="refuge" {{#if (eq system.assetType "refuge")}}selected{{/if}}>Refuge</option>
+    <option value="resources" {{#if (eq system.assetType "resources")}}selected{{/if}}>Resources</option>
+    <option value="servants" {{#if (eq system.assetType "servants")}}selected{{/if}}>Servants</option>
+    <option value="status" {{#if (eq system.assetType "status")}}selected{{/if}}>Status</option>
+ </select>
+</div>

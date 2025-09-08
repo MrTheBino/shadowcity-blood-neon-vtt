@@ -1,0 +1,118 @@
+<section class="tab {{tabs.character.id}} {{tabs.character.cssClass}} scrollable" id="character"
+    data-tab="{{tabs.character.id}}" data-group="{{tabs.character.group}}">
+    <div class="grid grid-2col">
+        <div class="left-half">
+            <div class="grid grid-2col">
+                <div class="ability-container">
+                    <label class="ability-label"> Hit Points</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.health.value" value="{{system.health.value}}"
+                            data-dtype="Number" />
+                        <input type="number" name="system.health.max" value="{{system.health.max}}"
+                            data-dtype="Number" />
+                    </div>
+                </div>
+                <div class="ability-container">
+                    <label class="ability-label">Bloodpoints</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.bloodpoints.value" value="{{system.bloodpoints.value}}"
+                            data-dtype="Number" />
+                        <input type="number" name="system.bloodpoints.max" value="{{system.bloodpoints.max}}"
+                            data-dtype="Number" />
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-2col">
+                <div class="ability-container">
+                    <label class="ability-label">Defense</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.defense" value="{{system.defense}}" data-dtype="Number" />
+                    </div>
+                </div>
+                <div class="ability-container">
+                    <label class="ability-label">Humanity</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.humanity" value="{{system.humanity}}" data-dtype="Number" />
+                    </div>
+                </div>
+            </div>
+            <div class="abilities-section">
+                <div class="grid grid-2col">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='awareness'
+                    label='Awareness' value=system.abilities.awareness.value
+                    mod_value=system.abilities.awareness.mod_value}}
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='physique'
+                    label='Physique' value=system.abilities.physique.value
+                    mod_value=system.abilities.physique.mod_value}}
+                </div>
+                <div class="grid grid-2col">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='cognition'
+                    label='Cognition' value=system.abilities.cognition.value
+                    mod_value=system.abilities.cognition.mod_value}}
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='quickness'
+                    label='Quickness' value=system.abilities.quickness.value
+                    mod_value=system.abilities.quickness.mod_value}}
+                </div>
+                <div class="grid grid-2col">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='magnetism'
+                    label='Magnetism' value=system.abilities.magnetism.value
+                    mod_value=system.abilities.magnetism.mod_value}}
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='willpower'
+                    label='Willpower' value=system.abilities.willpower.value
+                    mod_value=system.abilities.willpower.mod_value}}
+                </div>
+            </div>
+        </div>
+        <div class="right-half">
+            <div class="grid grid-4col">
+                <div class="ability-container">
+                    <label class="ability-label">Luck</label>
+                    <div class="grid grid-2col">
+                        <input class="grid-span-2" type="number" name="system.luck" value="{{system.luck}}" data-dtype="Number" />
+                    </div>
+                </div>
+                <div class="ability-container">
+                    <label class="ability-label">Funds</label>
+                    <div class="grid grid-2col">
+                        <input class="grid-span-2" type="number" name="system.money" value="{{system.money}}" data-dtype="Number" />
+                    </div>
+                </div>
+                <div class="ability-container">
+                    <label class="ability-label">Lvl</label>
+                    <div class="grid grid-2col">
+                        <input class="grid-span-2" type="number" name="system.level" value="{{system.level}}" data-dtype="Number" />
+                    </div>
+                </div>
+                <div class="ability-container">
+                    <label class="ability-label">XP</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.xp.value" value="{{system.xp.value}}" data-dtype="Number" />
+                        <input type="number" name="system.xp.max" value="{{system.xp.max}}" data-dtype="Number" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="background">
+                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=background
+                    label='Background'}}
+            </div>
+
+            <div class="Bloodline">
+                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=bloodline
+                    label='Bloodline'}}
+            </div>
+            <div class="Class">
+                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=class
+                    label='Class'}}
+            </div>
+            <div class="Compulsion">
+                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=compulsion
+                    label='Compulsion'}}
+            </div>
+            <div class="Feeding Habits">
+                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=feeding
+                    label='Feeding Habits'}}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,18 @@
+.single-feature-container{
+    border: 1px solid $c-neon;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    
+    .feature-header{
+        font-weight: bold;
+        margin-bottom: 0.25em;
+        background-color: $c-neon;
+        font-size: 1.25em;
+        text-align: center;
+    }
+
+    .feature-name{
+        text-align: center;
+        font-weight: bold;
+    }
+}

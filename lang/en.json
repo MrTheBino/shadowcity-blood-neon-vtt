@@ -1,0 +1,28 @@
+{
+  "SHADOWCITY": {
+    "Tabs": {
+      "details": "Details"
+    },
+    "ASSET_TYPES": {
+      "ally": "Ally",
+      "contact": "Contact",
+      "equipment": "Equipment",
+      "implant": "Implant",
+      "vehicle": "Vehicle"
+    },
+    "LABELS":{
+      "Roll": "roll"
+    },
+    "TYPES": {
+      "Actor": {
+        "character": "Character",
+        "npc": "NPC"
+      },
+      "Item": {
+        "item": "Item",
+        "feature": "Feature",
+        "spell": "Spell"
+      }
+    }
+  }
+}

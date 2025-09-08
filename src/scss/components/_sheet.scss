@@ -1,0 +1,36 @@
+.sheet-header {
+    flex: 0;
+    margin: 2px;
+    padding: 2px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 4px;
+    align-items: center;
+    color: white;
+    min-height: 120px;
+
+    .portrait-img{
+        grid-row: span 2;
+    }
+
+    .logo-img{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.item-header {
+    flex: 0;
+    margin: 2px;
+    padding: 2px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 4px;
+    align-items: center;
+    color: white;
+    min-height: 120px;
+
+    .item-img{
+        grid-row: span 2;
+    }
+}

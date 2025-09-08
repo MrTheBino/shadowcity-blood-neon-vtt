@@ -1,0 +1,8 @@
+{
+  "Actor": {
+    "types": ["character", "npc"]
+  },
+  "Item": {
+    "types": ["item", "asset","touchstone","discipline","background","bloodline","compulsion","feeding","class"]
+  }
+}
