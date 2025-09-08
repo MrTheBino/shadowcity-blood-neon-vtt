@@ -100,6 +100,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         let feeding = null;
         let compulsion = null;
         let klass = null;
+        const weapons = [];
 
         let inventory = this.options.document.items;
         for (let i of inventory) {
@@ -130,9 +131,12 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             else if (i.type === 'class') {
                 klass = i;
             }
+            else if (i.type === 'weapon') {
+                weapons.push(i);
+            }
         }
 
-        return {gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass}
+        return {gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass, weapons: weapons}
     }
 
     /** @inheritDoc */

@@ -1,0 +1,6 @@
+<select name="{{name}}">
+    <option value="close" {{#if (eq value "close")}}selected{{/if}}>Close (5 feet)</option>
+    <option value="near" {{#if (eq value "near")}}selected{{/if}}>Near (20-30 feet)</option>
+    <option value="short" {{#if (eq value "short")}}selected{{/if}}>Short (80-100 feet)</option>
+    <option value="far" {{#if (eq value "far")}}selected{{/if}}>Far (within LoS)</option>
+</select>

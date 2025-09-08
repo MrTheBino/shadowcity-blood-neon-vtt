@@ -1,6 +1,6 @@
 import ShadowCityItemBase from "./base-item.mjs";
 
-export default class ShadowCityRangedWeapon extends ShadowCityItemBase {
+export default class ShadowCityWeapon extends ShadowCityItemBase {
 
     static defineSchema() {
         const fields = foundry.data.fields;
@@ -12,9 +12,10 @@ export default class ShadowCityRangedWeapon extends ShadowCityItemBase {
             max: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 })
         });
 
-        schema.range = new fields.StringField({ blank: true });
+        schema.ability = new fields.StringField({ blank: false , initial: "physique"});
+        schema.range = new fields.StringField({ blank: true , initial: "close"});
         schema.damage = new fields.StringField({ blank: true });
-        schema.rangedProperties = new fields.SchemaField({
+        schema.properties = new fields.SchemaField({
             automatic: new fields.BooleanField({ required: true, initial: false }),
             cloud: new fields.BooleanField({ required: true, initial: false }),
             concealed: new fields.BooleanField({ required: true, initial: false }),
@@ -32,9 +33,6 @@ export default class ShadowCityRangedWeapon extends ShadowCityItemBase {
     }
 
     prepareDerivedData() {
-        // Build the formula dynamically using string interpolation
-        const roll = this.roll;
-
-        this.formula = `${roll.diceNum}${roll.diceSize}${roll.diceBonus}`
+        
     }
 }

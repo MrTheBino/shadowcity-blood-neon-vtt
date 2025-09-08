@@ -55,7 +55,8 @@ Hooks.once('init', function () {
     bloodline: models.ShadowCityBloodline,
     compulsion: models.ShadowCityCompulsion,
     feeding: models.ShadowCityFeeding,
-    class: models.ShadowCityClass
+    class: models.ShadowCityClass,
+    weapon: models.ShadowCityWeapon
   }
 
   // Active Effects are never copied to the Actor,

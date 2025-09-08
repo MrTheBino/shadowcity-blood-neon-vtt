@@ -393,6 +393,16 @@
 .shadowcity .item-header .item-img {
   grid-row: span 2;
 }
+.shadowcity fieldset {
+  border: 1px solid #ff005d;
+  margin: 2px;
+  padding: 2px;
+}
+.shadowcity fieldset .properties-list {
+  list-style: none;
+  padding: 0;
+  gap: 0;
+}
 .shadowcity .single-feature-container {
   border: 1px solid #ff005d;
   border-radius: 5px;

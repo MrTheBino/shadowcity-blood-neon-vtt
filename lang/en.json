@@ -10,8 +10,21 @@
       "implant": "Implant",
       "vehicle": "Vehicle"
     },
-    "LABELS":{
+    "LABELS": {
       "Roll": "roll"
+    },
+    "WeaponProperties": {
+      "automatic": "Automatic: This weapon can also be fired in automatic mode for 2x damage, but at disadvantage.",
+      "cloud": "Cloud: This fills a near-radius area with choking toxic gas. Since vampires do not breathe, it has no effect except vision limitation.",
+      "concealed": "Concealed: This type of weapon can be hidden under your clothes without being obvious to others.",
+      "concussion": "Concussion: This disorients and confuses a target for 2d4 rounds. It will affect vampires.",
+      "flame": "Flame: This ignites all close flammable materials. Double damage to supernatural creatures.",
+      "heavy": "Heavy: This weapon is very heavy and takes a full round to set up before firing at a target.",
+      "scope": "Scope: This type of weapon has a mounted scope and imposes disadvantage if used against targets within short distance.",
+      "splash": "Splash: This causes an additional half-damage (round down) to everyone within near distance of the target.",
+      "subdual": "Subdual: This type of weapon will knock a mortal unconscious at zero HP instead of triggering a death timer. They wake up in 3d6 rounds.",
+      "suppressing": "Suppressing: This type of weapon always has a suppressive effect when it is fired at a target (no special action required).",
+      "twohanded": "Two-Handed: This type of weapon can only be used with both hands and your full attention."
     },
     "TYPES": {
       "Actor": {

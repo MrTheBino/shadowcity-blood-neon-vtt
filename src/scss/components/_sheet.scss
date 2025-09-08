@@ -9,11 +9,11 @@
     color: white;
     min-height: 120px;
 
-    .portrait-img{
+    .portrait-img {
         grid-row: span 2;
     }
 
-    .logo-img{
+    .logo-img {
         margin-left: auto;
         margin-right: auto;
     }
@@ -30,7 +30,20 @@
     color: white;
     min-height: 120px;
 
-    .item-img{
+    .item-img {
         grid-row: span 2;
+    }
+}
+
+fieldset {
+    border: 1px solid $c-neon;
+    margin: 2px;
+    padding: 2px;
+    
+
+    .properties-list {
+        list-style: none;
+        padding: 0;
+        gap: 0;
     }
 }

@@ -14,3 +14,4 @@ export {default as ShadowCityBloodline} from "./item-bloodline.mjs";
 export {default as ShadowCityCompulsion} from "./item-compulsion.mjs";
 export {default as ShadowCityFeeding} from "./item-feeding.mjs";
 export {default as ShadowCityClass} from "./item-class.mjs";
+export {default as ShadowCityWeapon} from "./item-weapon.mjs";

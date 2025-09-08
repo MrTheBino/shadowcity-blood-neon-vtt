@@ -68,3 +68,44 @@ async function rollDialogV1Callback(event, button, dialog, actor) {
         speaker: ChatMessage.getSpeaker({ actor }),
     });
 }
+
+export async function rollWeaponDialogV1(actor, formula, label) {
+    const cardTitle = label;
+    if(parseInt(formula) < 0){
+        formula = "1D20" + formula;
+    }else{
+        formula = "1D20+" + formula;
+    }
+    
+    const dialogVars = {
+        actor,
+        formula,
+        label
+    };
+
+    const html = await foundry.applications.handlebars.renderTemplate(
+        "systems/shadowcity-blood-neon-vtt/templates/dialogs/roll-dialog.hbs",
+        dialogVars
+    );
+
+    return new Promise((resolve) => {
+        new ShadowCityDialog({
+            window: { title: cardTitle },
+            content: html,
+            buttons: [
+                {
+                    action: 'roll',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.Roll"),
+                    callback: (event, button, dialog) => rollWeaponDialogV1Callback(event, button, dialog, actor),
+                },
+            ],
+            default: "roll",
+            close: () => resolve(null),
+        }).render(true);
+    });
+}
+
+async function rollWeaponDialogV1Callback(event, button, dialog, actor){
+
+}
