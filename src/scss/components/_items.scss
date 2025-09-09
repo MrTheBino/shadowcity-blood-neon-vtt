@@ -91,6 +91,30 @@
     font-size: 12px;
   }
 
+  .item-prop-price{
+    flex-grow: 0.75;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .item-prop-quantity{
+    flex-grow: 0.5;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .item-prop-gearslot{
+    flex-grow: 0.5;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .item-prop-properties{
+    flex-grow: 1;
+    text-align: center;
+    font-size: 12px;
+  }
+
   // Section Header
   .items-header {
     height: 28px;

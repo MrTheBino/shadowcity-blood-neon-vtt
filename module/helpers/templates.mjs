@@ -9,6 +9,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/shadowcity-blood-neon-vtt/templates/actor/tabs/tab-character.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/actor/parts/character-header.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs',
+    'systems/shadowcity-blood-neon-vtt/templates/actor/parts/npc-ability-partial.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/shared/ranged-select-dropdown.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs',

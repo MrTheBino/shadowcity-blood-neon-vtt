@@ -11,6 +11,7 @@ export default class ShadowCityCharacter extends ShadowCityActorBase {
     schema.humanity = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
     schema.money = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
     schema.luck = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
+    schema.availableGearSlots = new fields.NumberField({ required: true, nullable: false, initial: 3, min: 0 });
 
     schema.xp = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),

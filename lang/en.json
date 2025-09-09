@@ -6,12 +6,31 @@
     "ASSET_TYPES": {
       "ally": "Ally",
       "contact": "Contact",
-      "equipment": "Equipment",
-      "implant": "Implant",
-      "vehicle": "Vehicle"
+      "herd": "Herd",
+      "influence": "Influence",
+      "refuge": "Refuge",
+      "resources": "Resources",
+      "servants": "Servants",
+      "status": "Status"
     },
     "LABELS": {
-      "Roll": "roll"
+      "Description": "Description",
+      "RollNormal": "Normal",
+      "RollAdvantage": "Advantage",
+      "RollDisadvantage": "Disadvantage",
+      "WeaponProperties":{
+        "automatic": "Automatic",
+        "cloud": "Cloud",
+        "concealed": "Concealed",
+        "concussion": "Concussion",
+        "flame": "Flame",
+        "heavy": "Heavy",
+        "scope": "Scope",
+        "splash": "Splash",
+        "subdual": "Subdual",
+        "suppressing": "Suppressing",
+        "twohanded": "Two-Handed"
+      }
     },
     "WeaponProperties": {
       "automatic": "Automatic: This weapon can also be fired in automatic mode for 2x damage, but at disadvantage.",
@@ -25,17 +44,28 @@
       "subdual": "Subdual: This type of weapon will knock a mortal unconscious at zero HP instead of triggering a death timer. They wake up in 3d6 rounds.",
       "suppressing": "Suppressing: This type of weapon always has a suppressive effect when it is fired at a target (no special action required).",
       "twohanded": "Two-Handed: This type of weapon can only be used with both hands and your full attention."
-    },
-    "TYPES": {
+    }
+    
+  },
+  "TYPES": {
       "Actor": {
         "character": "Character",
         "npc": "NPC"
       },
       "Item": {
         "item": "Item",
-        "feature": "Feature",
-        "spell": "Spell"
+        "asset": "Asset",
+        "touchstone": "Touchstone",
+        "discipline": "Discipline",
+        "background": "Background",
+        "bloodline": "Bloodline",
+        "compulsion": "Compulsion",
+        "feeding": "Feeding Habbit",
+        "class": "Class",
+        "weapon": "Weapon",
+        "npcAttack": "NPC Attack",
+        "npcFeature": "NPC Feature",
+        "proficiency": "Proficiency"
       }
     }
-  }
 }

@@ -1,6 +1,6 @@
 <section class="tab {{tabs.equipment.id}} {{tabs.equipment.cssClass}} scrollable" id="equipment"
     data-tab="{{tabs.equipment.id}}" data-group="{{tabs.equipment.group}}">
-
+    <h2 class="equipment-section-header">Weapons</h2>
     <ol class='items-list'>
         <li class='item flexrow items-header'>
             <div class='item-name'>{{localize 'Name'}}</div>
@@ -9,7 +9,7 @@
             <div class='item-prop'>Properties</div>
             <div class='item-controls'>
                 <a class='item-control item-create' data-action="createItem" title='{{localize "DOCUMENT.Create" type='
-                    Item'}}' data-type='rangedWeapon'>
+                    Item'}}' data-type='weapon'>
                     <i class='fas fa-plus'></i>
                 </a>
             </div>
@@ -18,7 +18,7 @@
         <li class='item flexrow' data-item-id='{{item._id}}'>
             <div class='item-name'>
                 <div class='item-image'>
-                    <a class='rollable' data-roll-type='item'>
+                    <a class='rollable' data-roll-type='item' data-action="rollWeapon" data-item-id='{{item._id}}'>
                         <img src='{{item.img}}' title='{{item.name}}' width='24' height='24' />
                     </a>
                 </div>
@@ -41,12 +41,20 @@
         {{/each}}
     </ol>
 
+    <h2 class="equipment-section-header">Equipment</h2>
+    <div class="grid grid-4col">
+            <label class="ability-label">Gear Slots</label>
+            <input class="" type="number" name="system.availableGearSlots" value="{{system.availableGearSlots}}" data-dtype="Number" />
+            <label class="ability-label">Used Slots</label>
+            <input class="" type="number" value="{{usedGearSlots}}" data-dtype="Number" disabled/>
+    </div>
     <ol class='items-list'>
         <li class='item flexrow items-header'>
             <div class='item-name'>{{localize 'Name'}}</div>
-            <div class='item-prop'>Price</div>
-            <div class='item-prop'>Quantity</div>
-            <div class='item-prop'>Properties</div>
+            <div class='item-prop-price'>Price</div>
+            <div class='item-prop-quantity'>Qty</div>
+            <div class='item-prop-gearslot'>GS</div>
+            <div class='item-prop-properties'>Properties</div>
             <div class='item-controls'>
                 <a class='item-control item-create' data-action="createItem" title='{{localize "DOCUMENT.Create" type='
                     Item'}}' data-type='item'>
@@ -64,9 +72,10 @@
                 </div>
                 <span class="tooltip-hover" data-tooltip-html="{{{itemTooltipHTML item}}}">{{item.name}}</span>
             </div>
-            <div class='item-prop'>{{item.system.purchasePrice}}</div>
-            <div class='item-prop'>{{item.system.quantity}}</div>
-            <div class='item-prop'>{{item.system.properties}}</div>
+            <div class='item-prop-price'>{{item.system.purchasePrice}}</div>
+            <div class='item-prop-quantity'>{{item.system.quantity}}</div>
+            <div class='item-prop-gearslot'>{{item.system.gearSlots}}</div>
+            <div class='item-prop-properties'>{{item.system.properties}}</div>
             <div class='item-controls'>
                 <a class='item-control item-edit' data-action="editItem" title='{{localize "DOCUMENT.Update" type='
                     Item'}}'>

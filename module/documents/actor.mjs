@@ -3,6 +3,26 @@
  * @extends {Actor}
  */
 export class ShadowCityActor extends Actor {
+
+  static async create(data, options = {}) {
+    //make default Friendly and Linked on Creation
+    data.prototypeToken = data.prototypeToken || {};
+
+    let defaults = {};
+    if (data.type === "character") {
+      defaults = {
+        actorLink: true,
+        disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+      };
+    }
+
+
+    foundry.utils.mergeObject(data.prototypeToken, defaults, { overwrite: false });
+
+    const actor = await super.create(data, options);
+    return actor;
+  }
+
   /** @override */
   prepareData() {
     // Prepare data for the actor. Calling the super version of this executes
@@ -28,6 +48,18 @@ export class ShadowCityActor extends Actor {
   prepareDerivedData() {
     const actorData = this;
     const flags = actorData.flags.shadowcitybloodneonvtt || {};
+    this.usedGearSlots = 0;
+    if (this.type == "character") {
+      let inventory = this.items;
+      for (let i of inventory) {
+        if (i.type === 'item') {
+          this.usedGearSlots += i.system.gearSlots * i.system.quantity;
+        }
+        else if (i.type === 'weapon') {
+          this.usedGearSlots += i.system.gearSlots * i.system.quantity;
+        }
+      }
+    }
   }
 
   /**
@@ -52,7 +84,7 @@ export class ShadowCityActor extends Actor {
    * @returns {object} Plain object either via deepClone or the spread operator.
    */
   toPlainObject() {
-    const result = {...this};
+    const result = { ...this };
 
     // Simplify system data.
     result.system = this.system.toPlainObject();

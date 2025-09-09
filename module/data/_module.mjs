@@ -15,3 +15,6 @@ export {default as ShadowCityCompulsion} from "./item-compulsion.mjs";
 export {default as ShadowCityFeeding} from "./item-feeding.mjs";
 export {default as ShadowCityClass} from "./item-class.mjs";
 export {default as ShadowCityWeapon} from "./item-weapon.mjs";
+export {default as ShadowCityNpcAttack} from "./item-npc-attack.mjs";
+export {default as ShadowCityNpcFeature} from "./item-npc-feature.mjs";
+export {default as ShadowCityProficiency} from "./item-proficiency.mjs";

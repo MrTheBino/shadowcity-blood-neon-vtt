@@ -9,6 +9,7 @@ export default class ShadowCityItemBase extends ShadowCityDataModel {
 
     schema.quantity = new fields.NumberField({ ...requiredInteger, initial: 1, min: 1 });
     schema.weight = new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0 });
+    schema.gearSlots = new fields.NumberField({ required: true, nullable: false, initial: 1, min: 0 });
     schema.purchasePrice = new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0 });
     schema.illegal = new fields.BooleanField({ required: true, initial: false });
     schema.description = new fields.StringField({ required: true, blank: true });

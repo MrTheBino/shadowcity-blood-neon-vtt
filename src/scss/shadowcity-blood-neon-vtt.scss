@@ -12,6 +12,7 @@
 @import 'global/grid';
 @import 'global/flex';
 
+
 /* Styles limited to shadowcity-blood-neon-vtt sheets */
 .shadowcity {
   @import 'components/forms';
@@ -23,6 +24,8 @@
   @import 'components/ability';
 }
 
+  @import 'components/chat';
+  
 .prosemirror, prose-mirror {
   height: 100%;
 }

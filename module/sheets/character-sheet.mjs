@@ -1,5 +1,5 @@
 import { ShadowCityActorSheetV2 } from './actor-sheet-v2.mjs';
-import { rollDialogV1 } from '../lib/roll_dialog.mjs';
+import { rollDialogV1,rollWeaponDialogV1 } from '../lib/roll_dialog.mjs';
 
 export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
     #dragDrop // Private field to hold dragDrop handlers
@@ -12,7 +12,8 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             height: 700
         },
         actions: {
-            rollAbility: this.#handleRollAbility
+            rollAbility: this.#handleRollAbility,
+            rollWeapon: this.#handleRollWeapon
         },
         form: {
             submitOnChange: true
@@ -59,6 +60,10 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         equipment: {
             id: 'equipment',
             template: 'systems/shadowcity-blood-neon-vtt/templates/actor/tabs/tab-equipment.hbs'
+        },
+        biography: {
+            id: 'biography',
+            template: 'systems/shadowcity-blood-neon-vtt/templates/actor/tabs/tab-biography.hbs'
         }
     }
 
@@ -74,7 +79,8 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
                     { id: 'assets', group: 'sheet', label: 'Assets' },
                     { id: 'touchstones', group: 'sheet', label: 'Touchstones' },
                     { id: 'disciplines', group: 'sheet', label: 'Disciplines' },
-                    { id: 'equipment', group: 'sheet', label: 'Equipment' }
+                    { id: 'equipment', group: 'sheet', label: 'Equipment' },
+                    { id: 'biography', group: 'sheet', label: 'Biography' }
                 ],
             initial: 'character'
         }
@@ -83,10 +89,12 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
      /** @override */
     async _prepareContext(options) {
         let context = await super._prepareContext(options);
-
+        context.usedGearSlots = this.options.document.usedGearSlots;
+        
         let items = this._prepareItems();
 
         foundry.utils.mergeObject(context, items);
+
         return context;
     }
 
@@ -101,6 +109,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         let compulsion = null;
         let klass = null;
         const weapons = [];
+        const proficiencies = [];
 
         let inventory = this.options.document.items;
         for (let i of inventory) {
@@ -134,9 +143,12 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             else if (i.type === 'weapon') {
                 weapons.push(i);
             }
+            else if (i.type === 'proficiency') {
+                proficiencies.push(i);
+            }
         }
 
-        return {gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass, weapons: weapons}
+        return {gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass, weapons: weapons, proficiencies: proficiencies}
     }
 
     /** @inheritDoc */
@@ -150,5 +162,11 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         const ability = element.dataset.label;
         const formula = element.dataset.formula;
         rollDialogV1(this.actor, formula, ability);
+    }
+
+    static async #handleRollWeapon(event, element) {
+        event.preventDefault();
+        const weaponId = element.dataset.itemId;
+        rollWeaponDialogV1(this.actor, weaponId);
     }
 }

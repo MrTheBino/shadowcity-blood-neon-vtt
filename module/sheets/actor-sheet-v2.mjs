@@ -17,7 +17,7 @@ export class ShadowCityActorSheetV2 extends HandlebarsApplicationMixin(ActorShee
         actions: {
             createItem: this.#handleCreateItem,
             editItem: this.#handleEditItem,
-            deleteItem: this.#handleDeleteItem,
+            deleteItem: this.#handleDeleteItem
         },
         form: {
             submitOnChange: true
@@ -144,12 +144,18 @@ export class ShadowCityActorSheetV2 extends HandlebarsApplicationMixin(ActorShee
     }
 
     static async #handleDeleteItem(event, target) {
-        const li = $(target).parents('.item');
-        const item = this.actor.items.get(li.data('itemId'));
-        item.delete();
-        li.slideUp(200, () => this.render(false));
+        if (target.dataset.itemId == undefined) {
+            const li = $(target).parents('.item');
+            const item = this.actor.items.get(li.data('itemId'));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+        } else {
+            const item = this.actor.items.get(target.dataset.itemId);
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+        }
     }
-    
+
     /**
   * Create drag-and-drop workflow handlers for this Application
   * @returns {DragDrop[]} An array of DragDrop handlers

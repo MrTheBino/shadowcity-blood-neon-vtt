@@ -4,12 +4,8 @@
   "description": "The ShadowCity system for FoundryVTT!",
   "authors": [
     {
-      "name": "Asacolips",
-      "discord": "asacolips"
-    },
-    {
-      "name": "Lee Talman",
-      "discord": ".pizzaWizard"
+      "name": "MrTheBino",
+      "discord": "MrTheBino"
     }
   ],
   "url": "Replace this with a link to your public repository",
@@ -24,7 +20,7 @@
       "thumbnail": "systems/shadowcity-blood-neon-vtt/assets/anvil-impact.png"
     }
   ],
-  "version": "2.0.0",
+  "version": "0.1.0",
   "compatibility": {
     "minimum": 13,
     "verified": "13"

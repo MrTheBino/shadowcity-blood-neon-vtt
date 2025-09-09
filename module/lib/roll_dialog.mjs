@@ -7,6 +7,17 @@ export function addShowDicePromise(promises, roll) {
     }
 }
 
+function applyAdvantageDisadvantage(roll, advantage_modifier) {
+    console.log("Applying advantage/disadvantage:", advantage_modifier);
+    if(advantage_modifier === 0) return roll; // No advantage or disadvantage
+    if(advantage_modifier > 0){
+        roll = roll.replace("1D20", "2D20kh");
+    }else{
+        roll = roll.replace("1D20", "2D20kl");
+    }
+    return roll
+}
+
 export async function rollDialogV1(actor, formula, label) {
     const cardTitle = label;
     if(parseInt(formula) < 0){
@@ -34,8 +45,20 @@ export async function rollDialogV1(actor, formula, label) {
                 {
                     action: 'roll',
                     icon: '<i class="fas fa-dice-d6"></i>',
-                    label: game.i18n.localize("SHADOWCITY.LABELS.Roll"),
-                    callback: (event, button, dialog) => rollDialogV1Callback(event, button, dialog, actor),
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollNormal"),
+                    callback: (event, button, dialog) => rollDialogV1Callback(event, button, dialog, actor,0),
+                },
+                {
+                    action: 'rollAdvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollAdvantage"),
+                    callback: (event, button, dialog) => rollDialogV1Callback(event, button, dialog, actor,1),
+                },
+                {
+                    action: 'rollDisadvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollDisadvantage"),
+                    callback: (event, button, dialog) => rollDialogV1Callback(event, button, dialog, actor,-1),
                 },
             ],
             default: "roll",
@@ -44,14 +67,14 @@ export async function rollDialogV1(actor, formula, label) {
     });
 }
 
-async function rollDialogV1Callback(event, button, dialog, actor) {
+async function rollDialogV1Callback(event, button, dialog, actor,advantage_modifier) {
     let dicePromises = [];
     const actorRollData = actor.getRollData();
     const form = button.form;
-    console.log(form);
-    const formula = form.formula.value;
+    const formula = applyAdvantageDisadvantage(form.formula.value,advantage_modifier);
     const rollLabel = form.label.value;
 
+    console.log(formula);
     const diceRoll = new Roll(formula, actorRollData);
     await diceRoll.evaluate();
     addShowDicePromise(dicePromises, diceRoll);
@@ -69,35 +92,42 @@ async function rollDialogV1Callback(event, button, dialog, actor) {
     });
 }
 
-export async function rollWeaponDialogV1(actor, formula, label) {
-    const cardTitle = label;
-    if(parseInt(formula) < 0){
-        formula = "1D20" + formula;
-    }else{
-        formula = "1D20+" + formula;
-    }
+export async function rollWeaponDialogV1(actor, weaponId) {
+    const weapon = actor.items.get(weaponId);
     
     const dialogVars = {
         actor,
-        formula,
-        label
+        weaponId,
+        weapon
     };
 
     const html = await foundry.applications.handlebars.renderTemplate(
-        "systems/shadowcity-blood-neon-vtt/templates/dialogs/roll-dialog.hbs",
+        "systems/shadowcity-blood-neon-vtt/templates/dialogs/weapon-roll-dialog.hbs",
         dialogVars
     );
 
     return new Promise((resolve) => {
         new ShadowCityDialog({
-            window: { title: cardTitle },
+            window: { title: weapon.name },
             content: html,
             buttons: [
                 {
                     action: 'roll',
                     icon: '<i class="fas fa-dice-d6"></i>',
-                    label: game.i18n.localize("SHADOWCITY.LABELS.Roll"),
-                    callback: (event, button, dialog) => rollWeaponDialogV1Callback(event, button, dialog, actor),
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollNormal"),
+                    callback: (event, button, dialog) => rollWeaponDialogV1Callback(event, button, dialog, actor, 0),
+                },
+                {
+                    action: 'rollAdvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollAdvantage"),
+                    callback: (event, button, dialog) => rollWeaponDialogV1Callback(event, button, dialog, actor, 1),
+                },
+                {
+                    action: 'rollDisadvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollDisadvantage"),
+                    callback: (event, button, dialog) => rollWeaponDialogV1Callback(event, button, dialog, actor, -1),
                 },
             ],
             default: "roll",
@@ -106,6 +136,132 @@ export async function rollWeaponDialogV1(actor, formula, label) {
     });
 }
 
-async function rollWeaponDialogV1Callback(event, button, dialog, actor){
+async function rollWeaponDialogV1Callback(event, button, dialog, actor, advantage_modifier) {
+    const form = button.form;
+    const weaponId = form.weaponId.value;
+    const weapon = actor.items.get(weaponId);
+    const selectedAbility = form.ability.value;
+    const modifier = parseInt(form.modifier.value) || 0;
+    const damageFormula = form.damageFormula.value;
+    let dicePromises = [];
+    const actorRollData = actor.getRollData();
 
+    if(!weapon) return;
+
+    console.log(selectedAbility)
+
+    let formula = applyAdvantageDisadvantage("1D20", advantage_modifier);
+    if(selectedAbility === "awareness"){
+        formula = `${formula}+${actor.system.abilities.awareness.mod_value}`;
+    }else if(selectedAbility === "physique"){
+        formula = `${formula}+${actor.system.abilities.physique.mod_value}`;
+    }
+    formula = `${formula}+${modifier}`;
+
+    
+    const diceRoll = new Roll(formula, actorRollData);
+    await diceRoll.evaluate();
+    addShowDicePromise(dicePromises, diceRoll);
+
+    const damageRoll = new Roll(damageFormula, actorRollData);
+    await damageRoll.evaluate();
+    addShowDicePromise(dicePromises, damageRoll);
+
+    
+    await Promise.all(dicePromises);
+
+    let rollRenderedHTML = await diceRoll.render();
+    let rollDamageRenderedHTML = await damageRoll.render();
+
+    const html = await foundry.applications.handlebars.renderTemplate(
+        "systems/shadowcity-blood-neon-vtt/templates/chat/weapon-roll-result.hbs",
+        { roll: diceRoll, label: weapon.name, rollRenderedHTML:rollRenderedHTML, ability:selectedAbility, weapon: weapon, rollDamageRenderedHTML: rollDamageRenderedHTML }
+    );
+    ChatMessage.create({
+        content: html,
+        speaker: ChatMessage.getSpeaker({ actor }),
+    });
+}
+
+export async function rollNpcAttackDialog(actor, attackId) {
+    const attack = actor.items.get(attackId);
+
+    const dialogVars = {
+        actor,
+        attackId,
+        attack
+    };
+
+    const html = await foundry.applications.handlebars.renderTemplate(
+        "systems/shadowcity-blood-neon-vtt/templates/dialogs/npc-attack-roll-dialog.hbs",
+        dialogVars
+    );
+
+    return new Promise((resolve) => {
+        new ShadowCityDialog({
+            window: { title: attack.name },
+            content: html,
+            buttons: [
+                {
+                    action: 'roll',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollNormal"),
+                    callback: (event, button, dialog) => rollNpcAttackV1Callback(event, button, dialog, actor, 0),
+                },
+                {
+                    action: 'rollAdvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollAdvantage"),
+                    callback: (event, button, dialog) => rollNpcAttackV1Callback(event, button, dialog, actor, 1),
+                },
+                {
+                    action: 'rollDisadvantage',
+                    icon: '<i class="fas fa-dice-d6"></i>',
+                    label: game.i18n.localize("SHADOWCITY.LABELS.RollDisadvantage"),
+                    callback: (event, button, dialog) => rollNpcAttackV1Callback(event, button, dialog, actor, -1),
+                },
+            ],
+            default: "roll",
+            close: () => resolve(null),
+        }).render(true);
+    });
+}
+async function rollNpcAttackV1Callback(event, button, dialog, actor, advantage_modifier) {
+    const form = button.form;
+    const attackId = form.attackId.value;
+    const attack = actor.items.get(attackId);
+    const modifier = parseInt(form.modifier.value) || 0;
+    const damageFormula = form.damageFormula.value;
+    let dicePromises = [];
+    const actorRollData = actor.getRollData();
+
+    if(!attack) return;
+
+
+    let formula = applyAdvantageDisadvantage("1D20", advantage_modifier);
+    formula = `${formula}+${modifier}`;
+
+    
+    const diceRoll = new Roll(formula, actorRollData);
+    await diceRoll.evaluate();
+    addShowDicePromise(dicePromises, diceRoll);
+
+    const damageRoll = new Roll(damageFormula, actorRollData);
+    await damageRoll.evaluate();
+    addShowDicePromise(dicePromises, damageRoll);
+
+    
+    await Promise.all(dicePromises);
+
+    let rollRenderedHTML = await diceRoll.render();
+    let rollDamageRenderedHTML = await damageRoll.render();
+
+    const html = await foundry.applications.handlebars.renderTemplate(
+        "systems/shadowcity-blood-neon-vtt/templates/chat/npc-attack-roll-result.hbs",
+        { roll: diceRoll, label: attack.name, rollRenderedHTML:rollRenderedHTML, attack: attack, rollDamageRenderedHTML: rollDamageRenderedHTML }
+    );
+    ChatMessage.create({
+        content: html,
+        speaker: ChatMessage.getSpeaker({ actor }),
+    });
 }

@@ -1,8 +1,12 @@
 <div class="{{cssClass}}" autocomplete="off">
-    <div class="grid grid-6col">
+    <div class="grid grid-4col">
         <div>
             <label>Quantity</label>
             <input type="number" name="system.quantity" value="{{system.quantity}}" />
+        </div>
+        <div>
+            <label>Gear Slots</label>
+            <input type="number" name="system.gearSlots" value="{{system.gearSlots}}" data-dtype="Number" />
         </div>
         <div>
             <label>Price</label>
@@ -38,27 +42,27 @@
         <legend>Properties</legend>
         <ul class="grid grid-3col properties-list">
             <li><input type="checkbox" {{#if item.system.properties.automatic}} checked{{/if}}
-                    name="system.properties.automatic">Automatic</li>
+                    name="system.properties.automatic">{{localize 'SHADOWCITY.LABELS.WeaponProperties.automatic'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.cloud}} checked{{/if}}
-                    name="system.properties.cloud">cloud</li>
+                    name="system.properties.cloud">{{localize 'SHADOWCITY.LABELS.WeaponProperties.cloud'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.concealed}} checked{{/if}}
-                    name="system.properties.concealed">concealed</li>
+                    name="system.properties.concealed">{{localize 'SHADOWCITY.LABELS.WeaponProperties.concealed'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.concussion}} checked{{/if}}
-                    name="system.properties.concussion">concussion</li>
+                    name="system.properties.concussion">{{localize 'SHADOWCITY.LABELS.WeaponProperties.concussion'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.flame}} checked{{/if}}
-                    name="system.properties.flame">flame</li>
+                    name="system.properties.flame">{{localize 'SHADOWCITY.LABELS.WeaponProperties.flame'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.heavy}} checked{{/if}}
-                    name="system.properties.heavy">heavy</li>
+                    name="system.properties.heavy">{{localize 'SHADOWCITY.LABELS.WeaponProperties.heavy'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.scope}} checked{{/if}}
-                    name="system.properties.scope">scope</li>
+                    name="system.properties.scope">{{localize 'SHADOWCITY.LABELS.WeaponProperties.scope'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.splash}} checked{{/if}}
-                    name="system.properties.splash">splash</li>
+                    name="system.properties.splash">{{localize 'SHADOWCITY.LABELS.WeaponProperties.splash'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.subdual}} checked{{/if}}
-                    name="system.properties.subdual">subdual</li>
+                    name="system.properties.subdual">{{localize 'SHADOWCITY.LABELS.WeaponProperties.subdual'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.suppressing}} checked{{/if}}
-                    name="system.properties.suppressing">suppressing</li>
+                    name="system.properties.suppressing">{{localize 'SHADOWCITY.LABELS.WeaponProperties.suppressing'}}</li>
             <li><input type="checkbox" {{#if item.system.properties.twohanded}} checked{{/if}}
-                    name="system.properties.twohanded">two-handed</li>
+                    name="system.properties.twohanded">{{localize 'SHADOWCITY.LABELS.WeaponProperties.twohanded'}}</li>
         </ul>
     </fieldset>
 </div>

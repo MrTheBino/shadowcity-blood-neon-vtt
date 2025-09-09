@@ -1,7 +1,19 @@
 <div class="custom-dialog">
     <input type="hidden" name="weaponId" value="{{weaponId}}" data-dtype="String" />
     <div class="form-group">
-        <label class="resource-label">{{label}}:</label>
-        <input type="text" name="formula" value="{{formula}}" data-dtype="String" />
+        <label class="resource-label">Weapon</label>
+        <input type="text" name="" value="{{weapon.name}}" data-dtype="String" disabled/>
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Damage</label>
+        <input type="text" name="damageFormula" value="{{weapon.system.damage}}" data-dtype="String" />
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Ability</label>
+        {{> 'systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs' name='ability' value=weapon.system.ability}}
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Modifier</label>
+        <input type="number" name="modifier" value="0" data-dtype="Number" />
     </div>
 </div>

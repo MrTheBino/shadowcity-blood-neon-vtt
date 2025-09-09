@@ -11,7 +11,7 @@ export class ShadowCityItemSheetV2 extends HandlebarsApplicationMixin(ItemSheetV
         tag: 'form',
         position: {
             width: 600,
-            height: 450
+            height: 550
         },
         actions: {
 
@@ -61,7 +61,7 @@ export class ShadowCityItemSheetV2 extends HandlebarsApplicationMixin(ItemSheetV
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'description', group: 'sheet', label: 'Beschreibung' },
+                    { id: 'description', group: 'sheet', label: 'SHADOWCITY.LABELS.Description' },
                 ],
             initial: 'description'
         }

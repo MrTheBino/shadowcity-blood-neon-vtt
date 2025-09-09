@@ -225,12 +225,44 @@
   flex: 1;
 }
 .shadowcity .sheet-header h1.charname {
-  height: 50px;
+  height: 36px;
   padding: 0px;
   margin: 5px 0;
   border-bottom: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 2em;
 }
 .shadowcity .sheet-header h1.charname input {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.shadowcity .item-header {
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.shadowcity .item-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+.shadowcity .item-header .header-fields {
+  flex: 1;
+}
+.shadowcity .item-header h1.charname {
+  height: 36px;
+  padding: 0px;
+  margin: 5px 0;
+  border-bottom: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 2em;
+}
+.shadowcity .item-header h1.charname input {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -329,6 +361,26 @@
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
+.shadowcity .items-list .item-prop-price {
+  flex-grow: 0.75;
+  text-align: center;
+  font-size: 12px;
+}
+.shadowcity .items-list .item-prop-quantity {
+  flex-grow: 0.5;
+  text-align: center;
+  font-size: 12px;
+}
+.shadowcity .items-list .item-prop-gearslot {
+  flex-grow: 0.5;
+  text-align: center;
+  font-size: 12px;
+}
+.shadowcity .items-list .item-prop-properties {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 12px;
+}
 .shadowcity .items-list .items-header {
   height: 28px;
   margin: 2px 0;
@@ -403,6 +455,15 @@
   padding: 0;
   gap: 0;
 }
+.shadowcity .npc-feature-header {
+  width: 100%;
+  border-bottom: 1px solid #ff005d;
+}
+.shadowcity .equipment-section-header {
+  font-family: "Roboto", sans-serif;
+  border-bottom: 1px solid #ff005d;
+  font-size: 1.5em;
+}
 .shadowcity .single-feature-container {
   border: 1px solid #ff005d;
   border-radius: 5px;
@@ -420,6 +481,7 @@
   font-weight: bold;
 }
 .shadowcity .ability-container .ability-label {
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   margin-bottom: 0.25rem;
   display: block;
@@ -427,6 +489,11 @@
   padding: 0.15rem;
   border-radius: 0.25rem;
   text-align: center;
+}
+
+.card-title {
+  text-align: center;
+  font-weight: bold;
 }
 
 .prosemirror, prose-mirror {

@@ -1,0 +1,15 @@
+<div class="custom-dialog">
+    <input type="hidden" name="attackId" value="{{attackId}}" data-dtype="String" />
+    <div class="form-group">
+        <label class="resource-label">Attack</label>
+        <input type="text" name="" value="{{attack.name}}" data-dtype="String" disabled/>
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Damage</label>
+        <input type="text" name="damageFormula" value="{{attack.system.damage}}" data-dtype="String" />
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Modifier</label>
+        <input type="number" name="modifier" value="{{attack.system.attackBonus}}" data-dtype="Number" />
+    </div>
+</div>

@@ -68,19 +68,22 @@
                 <div class="ability-container">
                     <label class="ability-label">Luck</label>
                     <div class="grid grid-2col">
-                        <input class="grid-span-2" type="number" name="system.luck" value="{{system.luck}}" data-dtype="Number" />
+                        <input class="grid-span-2" type="number" name="system.luck" value="{{system.luck}}"
+                            data-dtype="Number" />
                     </div>
                 </div>
                 <div class="ability-container">
                     <label class="ability-label">Funds</label>
                     <div class="grid grid-2col">
-                        <input class="grid-span-2" type="number" name="system.money" value="{{system.money}}" data-dtype="Number" />
+                        <input class="grid-span-2" type="number" name="system.money" value="{{system.money}}"
+                            data-dtype="Number" />
                     </div>
                 </div>
                 <div class="ability-container">
                     <label class="ability-label">Lvl</label>
                     <div class="grid grid-2col">
-                        <input class="grid-span-2" type="number" name="system.level" value="{{system.level}}" data-dtype="Number" />
+                        <input class="grid-span-2" type="number" name="system.level" value="{{system.level}}"
+                            data-dtype="Number" />
                     </div>
                 </div>
                 <div class="ability-container">
@@ -94,24 +97,39 @@
 
             <div class="background">
                 {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=background
-                    label='Background'}}
+                label='Background'}}
             </div>
 
             <div class="Bloodline">
                 {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=bloodline
-                    label='Bloodline'}}
+                label='Bloodline'}}
             </div>
             <div class="Class">
                 {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=class
-                    label='Class'}}
+                label='Class'}}
             </div>
             <div class="Compulsion">
                 {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=compulsion
-                    label='Compulsion'}}
+                label='Compulsion'}}
             </div>
             <div class="Feeding Habits">
                 {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=feeding
-                    label='Feeding Habits'}}
+                label='Feeding Habits'}}
+            </div>
+            <div class="single-feature-container">
+                <div class="feature-header">Proficiencies <a data-action="createItem" data-type="proficiency">+</a></div>
+
+
+                <div class="feature-name">
+                    {{#each proficiencies as |item id|}}
+                    <span data-action="editItem" data-item-id="{{item._id}}">{{item.name}}
+                        <a class='item-control item-delete' data-action="deleteItem" data-item-id="{{item._id}}"
+                            title='{{localize "DOCUMENT.Delete" type=' Item'}}'>
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </span>
+                    {{/each}}
+                </div>
             </div>
         </div>
     </div>

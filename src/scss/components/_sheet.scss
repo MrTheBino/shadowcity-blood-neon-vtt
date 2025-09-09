@@ -47,3 +47,14 @@ fieldset {
         gap: 0;
     }
 }
+
+.npc-feature-header{
+    width: 100%;
+    border-bottom: 1px solid $c-neon;
+}
+
+.equipment-section-header{
+    font-family: $font-primary;
+    border-bottom: 1px solid $c-neon;
+    font-size: 1.5em;
+}
