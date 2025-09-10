@@ -3,4 +3,9 @@
     {{label}}
   </div>
   {{{rollRenderedHTML}}}
+  {{#if (gt difficulty 0)}}
+    <div class="card-title">
+      Difficulty: {{difficulty}} - {{#if isSuccess}}<span style="color:green">Success</span>{{else}}<span style="color:red">Failure</span>{{/if}}
+    </div>
+  {{/if}}
 </form>

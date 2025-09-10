@@ -4,13 +4,14 @@ import { ShadowCityItem } from './documents/item.mjs';
 // Import sheet classes.
 import { ShadowCityCharacterSheetV2 } from './sheets/character-sheet.mjs';
 import { ShadowCityItemSheetV2 } from './sheets/item-sheet-v2.mjs';
-import {ShadowCityNpcSheetV2} from './sheets/npc-sheet-v2.mjs';
+import { ShadowCityNpcSheetV2 } from './sheets/npc-sheet-v2.mjs';
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { SHADOWCITY } from './helpers/config.mjs';
 // Import DataModel classes
 import * as models from './data/_module.mjs';
+import {abilityModifier} from './lib/util.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -80,7 +81,7 @@ Hooks.once('init', function () {
     label: 'SHADOWCITY.SheetLabels.Actor',
     types: ['npc']
   });
-  
+
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('shadowcity-blood-neon-vtt', ShadowCityItemSheetV2, {
     makeDefault: true,
@@ -102,6 +103,10 @@ Handlebars.registerHelper('itemTooltipHTML', function (item) {
 // If you need to add Handlebars helpers, here is a useful example:
 Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
+});
+
+Handlebars.registerHelper('abilityModifier', function (ability) {
+  return abilityModifier(ability);
 });
 
 /* -------------------------------------------- */

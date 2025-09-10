@@ -1,6 +1,6 @@
 <section class="tab {{tabs.character.id}} {{tabs.character.cssClass}} scrollable" id="character"
     data-tab="{{tabs.character.id}}" data-group="{{tabs.character.group}}">
-    <div class="grid grid-2col">
+    <div class="flexrow character-main-view">
         <div class="left-half">
             <div class="grid grid-2col">
                 <div class="ability-container">
@@ -39,26 +39,26 @@
             <div class="abilities-section">
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='awareness'
-                    label='Awareness' value=system.abilities.awareness.value
+                    label='Awareness' value=system.abilities.awareness.value ability=system.abilities.awareness
                     mod_value=system.abilities.awareness.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='physique'
-                    label='Physique' value=system.abilities.physique.value
+                    label='Physique' value=system.abilities.physique.value ability=system.abilities.physique
                     mod_value=system.abilities.physique.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='cognition'
-                    label='Cognition' value=system.abilities.cognition.value
+                    label='Cognition' value=system.abilities.cognition.value ability=system.abilities.cognition
                     mod_value=system.abilities.cognition.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='quickness'
-                    label='Quickness' value=system.abilities.quickness.value
+                    label='Quickness' value=system.abilities.quickness.value ability=system.abilities.quickness
                     mod_value=system.abilities.quickness.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='magnetism'
-                    label='Magnetism' value=system.abilities.magnetism.value
+                    label='Magnetism' value=system.abilities.magnetism.value ability=system.abilities.magnetism
                     mod_value=system.abilities.magnetism.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='willpower'
-                    label='Willpower' value=system.abilities.willpower.value
+                    label='Willpower' value=system.abilities.willpower.value ability=system.abilities.willpower
                     mod_value=system.abilities.willpower.mod_value}}
                 </div>
             </div>
@@ -95,31 +95,55 @@
                 </div>
             </div>
 
-            <div class="background">
-                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=background
-                label='Background'}}
-            </div>
+            <div class="grid grid-2col">
+                <div class="background">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=background
+                    label='Background'}}
+                </div>
 
-            <div class="Bloodline">
-                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=bloodline
-                label='Bloodline'}}
+                <div class="Bloodline">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=bloodline
+                    label='Bloodline'}}
+                </div>
             </div>
-            <div class="Class">
-                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=class
-                label='Class'}}
+            <div class="grid grid-2col">
+                <div class="Class">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=class
+                    label='Class'}}
+                </div>
+                <div class="Compulsion">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=compulsion
+                    label='Compulsion'}}
+                </div>
             </div>
-            <div class="Compulsion">
-                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=compulsion
-                label='Compulsion'}}
+            <div class="grid grid-2col">
+                <div class="FeedingHabits">
+                    {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=feeding
+                    label='Feeding Habits'}}
+                </div>
             </div>
-            <div class="Feeding Habits">
-                {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=feeding
-                label='Feeding Habits'}}
+            <div class="grid grid-2col">
+                <div class="single-feature-container">
+                    <div class="feature-header">BP used this night</div>
+                    <input type="number" name="system.bloodpoints.used" value="{{system.bloodpoints.used}}"
+                        data-dtype="Number" />
+                </div>
+                <div class="single-feature-container">
+                    <div class="feature-header">Blood Boost</div>
+                    <select class="bloodboost-select">
+                        <option value="none">None</option>
+                        <option value="awareness" {{#if system.abilities.awareness.bloodboost}}selected{{/if}}>Awareness</option>
+                        <option value="physique" {{#if system.abilities.physique.bloodboost}}selected{{/if}}>Physique</option>
+                        <option value="cognition" {{#if system.abilities.cognition.bloodboost}}selected{{/if}}>Cognition</option>
+                        <option value="quickness" {{#if system.abilities.quickness.bloodboost}}selected{{/if}}>Quickness</option>
+                        <option value="magnetism" {{#if system.abilities.magnetism.bloodboost}}selected{{/if}}>Magnetism</option>
+                        <option value="willpower" {{#if system.abilities.willpower.bloodboost}}selected{{/if}}>Willpower</option>
+                    </select>
+                </div>
             </div>
             <div class="single-feature-container">
-                <div class="feature-header">Proficiencies <a data-action="createItem" data-type="proficiency">+</a></div>
-
-
+                <div class="feature-header">Proficiencies <a data-action="createItem" data-type="proficiency">+</a>
+                </div>
                 <div class="feature-name">
                     {{#each proficiencies as |item id|}}
                     <span data-action="editItem" data-item-id="{{item._id}}">{{item.name}}
@@ -131,6 +155,12 @@
                     {{/each}}
                 </div>
             </div>
+            <fieldset>
+                <legend>Checks</legend>
+                <button data-action="rollFrenzyCheck" class="roll-button"><img
+                        src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
+                        height="12px" />Frenzy</button>
+            </fieldset>
         </div>
     </div>
 </section>

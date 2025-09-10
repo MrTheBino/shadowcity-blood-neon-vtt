@@ -8,7 +8,7 @@ export default class ShadowCityCharacter extends ShadowCityActorBase {
     const schema = super.defineSchema();
 
     schema.level = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
-    schema.humanity = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
+    schema.humanity = new fields.NumberField({ ...requiredInteger, initial: 0 });
     schema.money = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
     schema.luck = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
     schema.availableGearSlots = new fields.NumberField({ required: true, nullable: false, initial: 3, min: 0 });
@@ -21,45 +21,46 @@ export default class ShadowCityCharacter extends ShadowCityActorBase {
     schema.bloodpoints = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+      used: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
     })
 
     schema.abilities = new fields.SchemaField({
       awareness: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false })
       }),
       physique: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false })
       }),
       cognition: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false })
       }),
       quickness: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false }) 
       }),
       magnetism: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false })
       }),
       willpower: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
         mod_value: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+        bloodboost: new fields.BooleanField({ required: true, initial: false })
       }),
     });
     return schema;
   }
 
   prepareDerivedData() {
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    /*for (const key in this.abilities) {
-      // Calculate the modifier using d20 rules.
-      this.abilities[key].mod = Math.floor((this.abilities[key].value - 10) / 2);
-      // Handle ability label localization.
-      this.abilities[key].label = game.i18n.localize(CONFIG.SHADOWCITY.abilities[key]) ?? key;
-    }*/
+    //this.reactionCheckFormula = `2D6+${this.system.abilities.magnetism.mod_value}`;
   }
 
   getRollData() {

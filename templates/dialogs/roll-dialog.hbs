@@ -4,4 +4,10 @@
         <input type="hidden" name="label" value="{{label}}" data-dtype="String" />
         <input type="text" name="formula" value="{{formula}}" data-dtype="String" />
     </div>
+    {{#if (gt difficulty 0)}}
+        <div class="form-group">
+            <label class="resource-label">Difficulty</label>
+            <input type="text" name="difficulty" value="{{difficulty}}" data-dtype="Number" />
+        </div>
+    {{/if}}
 </div>

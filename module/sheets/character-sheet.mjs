@@ -9,11 +9,13 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         tag: 'form',
         position: {
             width: 600,
-            height: 700
+            height: 750
         },
         actions: {
             rollAbility: this.#handleRollAbility,
-            rollWeapon: this.#handleRollWeapon
+            rollWeapon: this.#handleRollWeapon,
+            rollFrenzyCheck: this.#handleRollFrenzyCheck,
+            useDiscipline: this.#handleUseDiscipline
         },
         form: {
             submitOnChange: true
@@ -154,6 +156,26 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
+         const bloodboostSelect = this.element.querySelectorAll('.bloodboost-select');
+        for (const element of bloodboostSelect) {
+            element.addEventListener("change", event => this.handleBloodboostSelect(element))
+        }
+    }
+
+    async handleBloodboostSelect(element) {
+        const selectedValue = element.value;
+
+        this.actor.update({"system.abilities.awareness.bloodboost": false});
+        this.actor.update({"system.abilities.physique.bloodboost": false});
+        this.actor.update({"system.abilities.cognition.bloodboost": false});
+        this.actor.update({"system.abilities.quickness.bloodboost": false});
+        this.actor.update({"system.abilities.magnetism.bloodboost": false});
+        this.actor.update({"system.abilities.willpower.bloodboost": false});
+        if(selectedValue !== "none") {
+            const path = `system.abilities.${selectedValue}.bloodboost`;
+            this.actor.update({[path]: true});
+        }
+        // Handle the blood boost selection logic here
     }
 
     static async #handleRollAbility(event, element) {
@@ -164,9 +186,36 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         rollDialogV1(this.actor, formula, ability);
     }
 
+    static async #handleRollFrenzyCheck(event, element) {
+        event.preventDefault();
+        rollDialogV1(this.actor, "0", "Frenzy", 10 - this.actor.system.level);
+    }
+
     static async #handleRollWeapon(event, element) {
         event.preventDefault();
         const weaponId = element.dataset.itemId;
         rollWeaponDialogV1(this.actor, weaponId);
+    }
+
+    static async #handleUseDiscipline(event, element) {
+        event.preventDefault();
+        const disciplineId = element.dataset.itemId;
+        const discipline = this.actor.items.get(disciplineId);
+
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: `Do you want to use ${discipline.name} for ${discipline.system.bloodpoints} bloodpoints?`,
+            rejectClose: false,
+            modal: true
+        });
+        if (proceed) {
+            this.actor.update({"system.bloodpoints.used": this.actor.system.bloodpoints.used + discipline.system.bloodpoints});
+            this.actor.update({"system.bloodpoints.value": this.actor.system.bloodpoints.value - discipline.system.bloodpoints});
+
+            ChatMessage.create({
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: `Used discipline ${discipline.name}, spending ${discipline.system.bloodpoints} BP. ${this.actor.system.bloodpoints.value} BP remaining. ${this.actor.system.bloodpoints.used} BP used this night.`
+        });
+        }
     }
 }

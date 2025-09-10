@@ -1,4 +1,4 @@
-<select name="{{name}}">
+<select name="{{name}}" data-dtype="String" {{#if disabled}}disabled{{/if}}>
     <option value="physique" {{#if (eq value "physique")}}selected{{/if}}>Physique</option>
     <option value="awareness" {{#if (eq value "awareness")}}selected{{/if}}>Awareness</option>
 </select>

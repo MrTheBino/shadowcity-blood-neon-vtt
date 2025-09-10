@@ -1,6 +1,6 @@
 <div class="ability-container rollable">
-    <label class="ability-label" data-action="rollAbility" data-label="{{label}}" data-formula="{{mod_value}}">{{label}} <i class="fas fa-dice-d6"></i></label>
-    <div class="grid grid-3col">
+    <label class="ability-label" data-action="rollAbility" data-label="{{label}}" data-formula="{{abilityModifier ability}}">{{label}} <i class="fas fa-dice-d6"></i></label>
+    <div class="grid grid-2col">
         <input type="number" name="system.abilities.{{key}}.value" value="{{value}}" data-dtype="Number" title="Stat Value"/>
         <input type="number" name="system.abilities.{{key}}.mod_value" value="{{mod_value}}" data-dtype="Number" title="Modifier"/>
     </div>

@@ -1,4 +1,5 @@
 import { ShadowCityDialog } from "./dialog.mjs";
+import {abilityModifier} from "./util.mjs";
 
 export function addShowDicePromise(promises, roll) {
     if (game.dice3d) {
@@ -18,7 +19,7 @@ function applyAdvantageDisadvantage(roll, advantage_modifier) {
     return roll
 }
 
-export async function rollDialogV1(actor, formula, label) {
+export async function rollDialogV1(actor, formula, label,difficulty = 0) {
     const cardTitle = label;
     if(parseInt(formula) < 0){
         formula = "1D20" + formula;
@@ -29,7 +30,8 @@ export async function rollDialogV1(actor, formula, label) {
     const dialogVars = {
         actor,
         formula,
-        label
+        label,
+        difficulty
     };
 
     const html = await foundry.applications.handlebars.renderTemplate(
@@ -73,6 +75,7 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
     const form = button.form;
     const formula = applyAdvantageDisadvantage(form.formula.value,advantage_modifier);
     const rollLabel = form.label.value;
+    const difficulty = parseInt(form.difficulty.value) || 0;
 
     console.log(formula);
     const diceRoll = new Roll(formula, actorRollData);
@@ -82,10 +85,16 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
 
     let rollRenderedHTML = await diceRoll.render();
 
+    let isSuccess = false;
+    if(difficulty > 0){
+        isSuccess = diceRoll.total >= difficulty;
+    }
+
     const html = await foundry.applications.handlebars.renderTemplate(
         "systems/shadowcity-blood-neon-vtt/templates/chat/roll-result.hbs",
-        { roll: diceRoll, label: rollLabel, rollRenderedHTML:rollRenderedHTML }
+        { roll: diceRoll, label: rollLabel, rollRenderedHTML:rollRenderedHTML, isSuccess:isSuccess, difficulty: difficulty }
     );
+
     ChatMessage.create({
         content: html,
         speaker: ChatMessage.getSpeaker({ actor }),
@@ -95,10 +104,25 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
 export async function rollWeaponDialogV1(actor, weaponId) {
     const weapon = actor.items.get(weaponId);
     
+    let humanityAttackBonus = 0;
+    
+    if(actor.system.humanity < 0){
+        humanityAttackBonus = actor.system.humanity * -1;
+    }
+
+    let modifier = 0;
+    if(weapon.system.ability === "awareness"){
+        modifier = abilityModifier(actor.system.abilities.awareness);
+    }else if(weapon.system.ability === "physique"){
+        modifier = abilityModifier(actor.system.abilities.physique);
+    }
+
     const dialogVars = {
         actor,
         weaponId,
-        weapon
+        weapon,
+        humanityAttackBonus,
+        modifier
     };
 
     const html = await foundry.applications.handlebars.renderTemplate(
@@ -143,20 +167,14 @@ async function rollWeaponDialogV1Callback(event, button, dialog, actor, advantag
     const selectedAbility = form.ability.value;
     const modifier = parseInt(form.modifier.value) || 0;
     const damageFormula = form.damageFormula.value;
+    const humanityAttackBonus = parseInt(form.humanityAttackBonus.value) || 0;
     let dicePromises = [];
     const actorRollData = actor.getRollData();
 
     if(!weapon) return;
 
-    console.log(selectedAbility)
-
     let formula = applyAdvantageDisadvantage("1D20", advantage_modifier);
-    if(selectedAbility === "awareness"){
-        formula = `${formula}+${actor.system.abilities.awareness.mod_value}`;
-    }else if(selectedAbility === "physique"){
-        formula = `${formula}+${actor.system.abilities.physique.mod_value}`;
-    }
-    formula = `${formula}+${modifier}`;
+    formula = `${formula}+${modifier}+${humanityAttackBonus}`;
 
     
     const diceRoll = new Roll(formula, actorRollData);

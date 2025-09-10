@@ -1,7 +1,5 @@
 .sheet-header {
     flex: 0;
-    margin: 2px;
-    padding: 2px;
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 4px;
@@ -21,8 +19,6 @@
 
 .item-header {
     flex: 0;
-    margin: 2px;
-    padding: 2px;
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 4px;
@@ -32,6 +28,11 @@
 
     .item-img {
         grid-row: span 2;
+    }
+
+    .logo-img {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -57,4 +58,17 @@ fieldset {
     font-family: $font-primary;
     border-bottom: 1px solid $c-neon;
     font-size: 1.5em;
+}
+
+.left-half{
+    margin-right: 5px;
+}
+
+.right-half{
+    margin-left: 5px;
+    flex-grow: 1.5;
+}
+
+.character-main-view{
+    align-items: start;
 }

@@ -24,8 +24,24 @@
   @import 'components/ability';
 }
 
-  @import 'components/chat';
-  
-.prosemirror, prose-mirror {
+@import 'components/chat';
+
+.prosemirror,
+prose-mirror {
   height: 100%;
+}
+
+.custom-dialog {
+
+  .form-group {
+    margin: 5px;
+  }
+
+  .resource-label {
+    flex-grow: 2;
+  }
+}
+
+.application .window-content {
+  padding: 2px;
 }

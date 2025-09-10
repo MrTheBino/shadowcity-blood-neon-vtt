@@ -1,0 +1,9 @@
+<div class="flexrow">
+    <select name="{{name}}">
+        <option value="close" {{#if (eq value "close")}}selected{{/if}}>Close</option>
+        <option value="near" {{#if (eq value "near")}}selected{{/if}}>Near</option>
+        <option value="short" {{#if (eq value "short")}}selected{{/if}}>Short</option>
+        <option value="far" {{#if (eq value "far")}}selected{{/if}}>Far</option>
+    </select>
+    <input type="text" name="{{nameExtra}}" value="{{valueExtra}}"  />
+</div>

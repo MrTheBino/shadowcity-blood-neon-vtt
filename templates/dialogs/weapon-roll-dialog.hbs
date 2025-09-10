@@ -10,10 +10,14 @@
     </div>
     <div class="form-group">
         <label class="resource-label">Ability</label>
-        {{> 'systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs' name='ability' value=weapon.system.ability}}
+        {{> 'systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs' name='ability' value=weapon.system.ability disabled=true}}
     </div>
     <div class="form-group">
         <label class="resource-label">Modifier</label>
-        <input type="number" name="modifier" value="0" data-dtype="Number" />
+        <input type="number" name="modifier" value="{{modifier}}" data-dtype="Number" />
+    </div>
+    <div class="form-group">
+        <label class="resource-label">Humanity Attk. Bonus</label>
+        <input type="number" name="humanityAttackBonus" value="{{humanityAttackBonus}}" data-dtype="Number" />
     </div>
 </div>

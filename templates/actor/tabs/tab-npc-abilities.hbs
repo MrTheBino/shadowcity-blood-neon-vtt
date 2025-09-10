@@ -85,7 +85,8 @@
                                     <img src='{{item.img}}' title='{{item.name}}' width='24' height='24' />
                                 </a>
                             </div>
-                            <span data-action="rollAttack" data-attack-id="{{item._id}}" class="rollable"> <strong>{{item.system.numAttacks}} {{item.name}} </strong>
+                            <span data-action="rollAttack" data-attack-id="{{item._id}}" class="rollable">
+                                <strong>{{item.system.numAttacks}} {{item.name}} </strong>
                                 +{{item.system.attackBonus}} ({{item.system.damage}} {{item.system.special}}) </span>
                         </div>
                         <div class='item-controls'>
@@ -103,6 +104,10 @@
                 </ol>
             </fieldset>
 
+            <fieldset>
+                <legend>Habits</legend>
+                <textarea name="system.habits" rows="4" cols="36" >{{system.habits}}</textarea>
+            </fieldset>
             <fieldset>
                 <legend>Features <a class='item-control item-create' data-action="createItem" data-type='npcFeature'>
                         <i class='fas fa-plus'></i>
@@ -135,6 +140,11 @@
                     </li>
                     {{/each}}
                 </ol>
+            </fieldset>
+            <fieldset>
+                <legend>Move</legend>
+                {{> "systems/shadowcity-blood-neon-vtt/templates/shared/move-select-partial.hbs" name="system.move" value=system.move
+                nameExtra="system.moveExtra" valueExtra=system.moveExtra}}
             </fieldset>
         </div>
     </div>
