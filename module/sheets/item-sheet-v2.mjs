@@ -49,7 +49,8 @@ export class ShadowCityItemSheetV2 extends HandlebarsApplicationMixin(ItemSheetV
         },
         description: {
             template: 'systems/shadowcity-blood-neon-vtt/templates/shared/partial-description.html',
-            id: 'description'
+            id: 'description',
+            scrollable: ['scrollable']
         }
     }
 

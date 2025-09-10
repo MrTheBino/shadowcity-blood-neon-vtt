@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.tab-description {
+  height: 95%;
+}
+
 .grid,
 .grid-2col {
   display: grid;
