@@ -100,6 +100,23 @@ export class ShadowCityActorSheetV2 extends HandlebarsApplicationMixin(ActorShee
             tooltip.addEventListener("mouseenter", event => this.handleTooltipMouseEnter(event));
             tooltip.addEventListener("mouseleave", event => this.handleTooltipMouseLeave(event));
         }*/
+
+            const itemEditableStatsElements = this.element.querySelectorAll('.item-editable-stat')
+        for (const input of itemEditableStatsElements) {
+            input.addEventListener("change", event => this.handleItemStatChanged(event))
+        }
+    }
+
+    async handleItemStatChanged(event) {
+        event.preventDefault();
+        const li = $(event.currentTarget).parents('.item');
+        const item = this.actor.items.get(li.data('itemId'));
+
+        if (event.target.type === 'checkbox') {
+            item.update({ [event.target.dataset.itemStat]: event.target.checked });
+        } else {
+            item.update({ [event.target.dataset.itemStat]: event.target.value });
+        }
     }
 
     static async #handleCreateItem(event, target) {

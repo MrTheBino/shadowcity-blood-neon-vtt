@@ -18,3 +18,4 @@ export {default as ShadowCityWeapon} from "./item-weapon.mjs";
 export {default as ShadowCityNpcAttack} from "./item-npc-attack.mjs";
 export {default as ShadowCityNpcFeature} from "./item-npc-feature.mjs";
 export {default as ShadowCityProficiency} from "./item-proficiency.mjs";
+export {default as ShadowCityArmor} from "./item-armor.mjs";

@@ -91,6 +91,14 @@
     font-size: 12px;
   }
 
+  .item-prop-small {
+    text-align: center;
+    border-left: 1px solid #c9c7b8;
+    border-right: 1px solid #c9c7b8;
+    font-size: 12px;
+    flex-grow: 0.5;
+  }
+
   .item-prop-price{
     flex-grow: 0.75;
     text-align: center;

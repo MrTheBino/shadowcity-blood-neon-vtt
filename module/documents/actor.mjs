@@ -49,6 +49,8 @@ export class ShadowCityActor extends Actor {
     const actorData = this;
     const flags = actorData.flags.shadowcitybloodneonvtt || {};
     this.usedGearSlots = 0;
+    this.defenseCalculated = this.system.defense;
+
     if (this.type == "character") {
       let inventory = this.items;
       for (let i of inventory) {
@@ -58,8 +60,16 @@ export class ShadowCityActor extends Actor {
         else if (i.type === 'weapon') {
           this.usedGearSlots += i.system.gearSlots * i.system.quantity;
         }
+        else if(i.type == "armor"){
+          if(i.system.mounted){
+            this.usedGearSlots += i.system.gearSlots;
+            this.defenseCalculated += i.system.defense;
+          }
+        }
       }
     }
+
+    
   }
 
   /**

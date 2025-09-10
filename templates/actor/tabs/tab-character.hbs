@@ -27,6 +27,8 @@
                     <label class="ability-label">Defense</label>
                     <div class="grid grid-2col">
                         <input type="number" name="system.defense" value="{{system.defense}}" data-dtype="Number" />
+                        <input type="number" class="neon-input" value="{{defenseCalculated}}" data-dtype="Number"
+                            disabled />
                     </div>
                 </div>
                 <div class="ability-container">
@@ -132,12 +134,18 @@
                     <div class="feature-header">Blood Boost</div>
                     <select class="bloodboost-select">
                         <option value="none">None</option>
-                        <option value="awareness" {{#if system.abilities.awareness.bloodboost}}selected{{/if}}>Awareness</option>
-                        <option value="physique" {{#if system.abilities.physique.bloodboost}}selected{{/if}}>Physique</option>
-                        <option value="cognition" {{#if system.abilities.cognition.bloodboost}}selected{{/if}}>Cognition</option>
-                        <option value="quickness" {{#if system.abilities.quickness.bloodboost}}selected{{/if}}>Quickness</option>
-                        <option value="magnetism" {{#if system.abilities.magnetism.bloodboost}}selected{{/if}}>Magnetism</option>
-                        <option value="willpower" {{#if system.abilities.willpower.bloodboost}}selected{{/if}}>Willpower</option>
+                        <option value="awareness" {{#if system.abilities.awareness.bloodboost}}selected{{/if}}>Awareness
+                        </option>
+                        <option value="physique" {{#if system.abilities.physique.bloodboost}}selected{{/if}}>Physique
+                        </option>
+                        <option value="cognition" {{#if system.abilities.cognition.bloodboost}}selected{{/if}}>Cognition
+                        </option>
+                        <option value="quickness" {{#if system.abilities.quickness.bloodboost}}selected{{/if}}>Quickness
+                        </option>
+                        <option value="magnetism" {{#if system.abilities.magnetism.bloodboost}}selected{{/if}}>Magnetism
+                        </option>
+                        <option value="willpower" {{#if system.abilities.willpower.bloodboost}}selected{{/if}}>Willpower
+                        </option>
                     </select>
                 </div>
             </div>
@@ -155,12 +163,22 @@
                     {{/each}}
                 </div>
             </div>
-            <fieldset>
-                <legend>Checks</legend>
-                <button data-action="rollFrenzyCheck" class="roll-button"><img
-                        src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
-                        height="12px" />Frenzy</button>
-            </fieldset>
         </div>
     </div>
+    <fieldset>
+        <legend>Checks / Actions / etc.</legend>
+        <div class="flexrow action-buttons">
+            <button data-action="rollFrenzyCheck" class="roll-button"><img
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
+                    height="16px" />Frenzy</button>
+            <button data-action="rollExpendedFrenzyCheck" class="roll-button"><img
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt="" height="16px" />Expended
+                Frenzy</button>
+            <button data-action="clickRiseAtSundown" class="roll-button"><img
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-sundown.svg" alt="" height="16px" />Rise At
+                Sundown</button>
+            <button data-action="clickBloodHealing" class="roll-button"><img
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodheal.svg" alt="" height="16px" />Blood Healing</button>
+        </div>
+    </fieldset>
 </section>

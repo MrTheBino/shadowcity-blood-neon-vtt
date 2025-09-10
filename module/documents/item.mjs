@@ -48,6 +48,9 @@ export class ShadowCityItem extends Item {
       case "npcFeature":
         image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-npc-feature.svg";
         break
+      case "armor":
+        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-armor.svg";
+        break
     }
 
     if (image != null) {

@@ -4,7 +4,7 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function () {
-  return loadTemplates([
+  return foundry.applications.handlebars.loadTemplates([
     // Actor partials.
     'systems/shadowcity-blood-neon-vtt/templates/actor/tabs/tab-character.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/actor/parts/character-header.hbs',

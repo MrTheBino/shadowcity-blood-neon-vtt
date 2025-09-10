@@ -62,7 +62,8 @@ Hooks.once('init', function () {
     weapon: models.ShadowCityWeapon,
     npcAttack: models.ShadowCityNpcAttack,
     npcFeature: models.ShadowCityNpcFeature,
-    proficiency: models.ShadowCityProficiency
+    proficiency: models.ShadowCityProficiency,
+    armor: models.ShadowCityArmor
   }
 
   // Active Effects are never copied to the Actor,
@@ -71,19 +72,19 @@ Hooks.once('init', function () {
   CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Register sheet application classes
-  Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('shadowcity-blood-neon-vtt', ShadowCityCharacterSheetV2, {
+  foundry.documents.collections.Actors.unregisterSheet('core', foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet('shadowcity-blood-neon-vtt', ShadowCityCharacterSheetV2, {
     makeDefault: true,
     label: 'SHADOWCITY.SheetLabels.Actor',
   });
-  Actors.registerSheet('shadowcity-blood-neon-vtt', ShadowCityNpcSheetV2, {
+  foundry.documents.collections.Actors.registerSheet('shadowcity-blood-neon-vtt', ShadowCityNpcSheetV2, {
     makeDefault: true,
     label: 'SHADOWCITY.SheetLabels.Actor',
     types: ['npc']
   });
 
-  Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('shadowcity-blood-neon-vtt', ShadowCityItemSheetV2, {
+  foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet('shadowcity-blood-neon-vtt', ShadowCityItemSheetV2, {
     makeDefault: true,
     label: 'SHADOWCITY.SheetLabels.Item',
   });

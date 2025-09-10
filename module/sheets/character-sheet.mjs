@@ -1,5 +1,5 @@
 import { ShadowCityActorSheetV2 } from './actor-sheet-v2.mjs';
-import { rollDialogV1,rollWeaponDialogV1 } from '../lib/roll_dialog.mjs';
+import { rollDialogV1, rollWeaponDialogV1 } from '../lib/roll_dialog.mjs';
 
 export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
     #dragDrop // Private field to hold dragDrop handlers
@@ -15,7 +15,10 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             rollAbility: this.#handleRollAbility,
             rollWeapon: this.#handleRollWeapon,
             rollFrenzyCheck: this.#handleRollFrenzyCheck,
-            useDiscipline: this.#handleUseDiscipline
+            rollExpendedFrenzyCheck: this.#handleRollExpendedFrenzyCheck,
+            useDiscipline: this.#handleUseDiscipline,
+            clickRiseAtSundown: this.#handleRiseAtSundown,
+            clickBloodHealing: this.#handleBloodHealing
         },
         form: {
             submitOnChange: true
@@ -34,7 +37,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         }
     }
 
-     static PARTS = {
+    static PARTS = {
         header: {
             id: 'header',
             template: 'systems/shadowcity-blood-neon-vtt/templates/actor/parts/character-header.hbs'
@@ -88,11 +91,12 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         }
     }
 
-     /** @override */
+    /** @override */
     async _prepareContext(options) {
         let context = await super._prepareContext(options);
         context.usedGearSlots = this.options.document.usedGearSlots;
-        
+        context.defenseCalculated = this.options.document.defenseCalculated;
+
         let items = this._prepareItems();
 
         foundry.utils.mergeObject(context, items);
@@ -112,6 +116,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         let klass = null;
         const weapons = [];
         const proficiencies = [];
+        const armor = []
 
         let inventory = this.options.document.items;
         for (let i of inventory) {
@@ -148,15 +153,18 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             else if (i.type === 'proficiency') {
                 proficiencies.push(i);
             }
+            else if (i.type === 'armor') {
+                armor.push(i);
+            }
         }
 
-        return {gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass, weapons: weapons, proficiencies: proficiencies}
+        return { gear: gear, assets: assets, touchstones: touchstones, disciplines: disciplines, background: background, bloodline: bloodline, feeding: feeding, compulsion: compulsion, class: klass, weapons: weapons, proficiencies: proficiencies, armor: armor };
     }
 
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
-         const bloodboostSelect = this.element.querySelectorAll('.bloodboost-select');
+        const bloodboostSelect = this.element.querySelectorAll('.bloodboost-select');
         for (const element of bloodboostSelect) {
             element.addEventListener("change", event => this.handleBloodboostSelect(element))
         }
@@ -165,15 +173,15 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
     async handleBloodboostSelect(element) {
         const selectedValue = element.value;
 
-        this.actor.update({"system.abilities.awareness.bloodboost": false});
-        this.actor.update({"system.abilities.physique.bloodboost": false});
-        this.actor.update({"system.abilities.cognition.bloodboost": false});
-        this.actor.update({"system.abilities.quickness.bloodboost": false});
-        this.actor.update({"system.abilities.magnetism.bloodboost": false});
-        this.actor.update({"system.abilities.willpower.bloodboost": false});
-        if(selectedValue !== "none") {
+        this.actor.update({ "system.abilities.awareness.bloodboost": false });
+        this.actor.update({ "system.abilities.physique.bloodboost": false });
+        this.actor.update({ "system.abilities.cognition.bloodboost": false });
+        this.actor.update({ "system.abilities.quickness.bloodboost": false });
+        this.actor.update({ "system.abilities.magnetism.bloodboost": false });
+        this.actor.update({ "system.abilities.willpower.bloodboost": false });
+        if (selectedValue !== "none") {
             const path = `system.abilities.${selectedValue}.bloodboost`;
-            this.actor.update({[path]: true});
+            this.actor.update({ [path]: true });
         }
         // Handle the blood boost selection logic here
     }
@@ -184,6 +192,11 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         const ability = element.dataset.label;
         const formula = element.dataset.formula;
         rollDialogV1(this.actor, formula, ability);
+    }
+
+    static async #handleRollExpendedFrenzyCheck(event, element) {
+        event.preventDefault();
+        rollDialogV1(this.actor, "0", "Expending Blood Frenzy", 5 + this.actor.system.bloodpoints.used);
     }
 
     static async #handleRollFrenzyCheck(event, element) {
@@ -197,6 +210,56 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         rollWeaponDialogV1(this.actor, weaponId);
     }
 
+    static async #handleBloodHealing(event, element) {
+        event.preventDefault();
+        if(this.actor.system.bloodpoints.value <= 0){
+            return;
+        }
+
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: `As a free action, a vampire can expend 1 BP to heal 1d6 HP. You can only do this once per round. You want to heal now?`,
+            rejectClose: false,
+            modal: true
+        });
+        if (proceed) {
+            const diceRoll = new Roll("1d6", this.actor.getRollData());
+            await diceRoll.evaluate();
+             if (game.dice3d) {
+                await game.dice3d.showForRoll(diceRoll, game.user, true, null, false);
+            }
+            this.actor.update({ "system.bloodpoints.value": this.actor.system.bloodpoints.value - 1 });
+            this.actor.update({ "system.health.value": Math.min(this.actor.system.health.max, this.actor.system.health.value + diceRoll.total) });
+
+            ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: `Blood Healing: Healed ${diceRoll.total} HP, spending 1 BP. ${this.actor.system.bloodpoints.value} BP remaining.`
+            });
+        }
+    }
+
+    static async #handleRiseAtSundown(event, element) {
+        event.preventDefault();
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: `Is your vampire rising up at sundown?`,
+            rejectClose: false,
+            modal: true
+        });
+        if (proceed) {
+            this.actor.update({ "system.bloodpoints.value": this.actor.system.bloodpoints.value - 1 });
+            this.actor.update({ "system.bloodpoints.used": 0 });
+            if (this.actor.system.bloodpoints.value < 0) {
+                this.actor.update({ "system.bloodpoints.value": 0 });
+            }
+
+            ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: `Rised up at sundown! 1 BP spent. ${this.actor.system.bloodpoints.value} BP remaining. BP used per night reset to 0.`
+            });
+        }
+    }
+
     static async #handleUseDiscipline(event, element) {
         event.preventDefault();
         const disciplineId = element.dataset.itemId;
@@ -208,14 +271,14 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             modal: true
         });
         if (proceed) {
-            this.actor.update({"system.bloodpoints.used": this.actor.system.bloodpoints.used + discipline.system.bloodpoints});
-            this.actor.update({"system.bloodpoints.value": this.actor.system.bloodpoints.value - discipline.system.bloodpoints});
+            this.actor.update({ "system.bloodpoints.used": this.actor.system.bloodpoints.used + discipline.system.bloodpoints });
+            this.actor.update({ "system.bloodpoints.value": this.actor.system.bloodpoints.value - discipline.system.bloodpoints });
 
             ChatMessage.create({
-            user: game.user.id,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: `Used discipline ${discipline.name}, spending ${discipline.system.bloodpoints} BP. ${this.actor.system.bloodpoints.value} BP remaining. ${this.actor.system.bloodpoints.used} BP used this night.`
-        });
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: `Used discipline ${discipline.name}, spending ${discipline.system.bloodpoints} BP. ${this.actor.system.bloodpoints.value} BP remaining. ${this.actor.system.bloodpoints.used} BP used this night.`
+            });
         }
     }
 }

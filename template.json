@@ -3,6 +3,6 @@
     "types": ["character", "npc"]
   },
   "Item": {
-    "types": ["item", "asset","touchstone","discipline","background","bloodline","compulsion","feeding","class","weapon","npcAttack","npcFeature","proficiency"]
+    "types": ["item", "asset","touchstone","discipline","background","bloodline","compulsion","feeding","class","weapon","npcAttack","npcFeature","proficiency","armor"]
   }
 }

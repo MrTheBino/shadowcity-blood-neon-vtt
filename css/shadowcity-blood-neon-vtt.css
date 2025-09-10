@@ -365,6 +365,13 @@
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
+.shadowcity .items-list .item-prop-small {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+  flex-grow: 0.5;
+}
 .shadowcity .items-list .item-prop-price {
   flex-grow: 0.75;
   text-align: center;
@@ -467,6 +474,8 @@
   font-family: "Roboto", sans-serif;
   border-bottom: 1px solid #ff005d;
   font-size: 1.5em;
+  margin-bottom: 10px;
+  margin-top: 0;
 }
 .shadowcity .left-half {
   margin-right: 5px;
@@ -477,6 +486,13 @@
 }
 .shadowcity .character-main-view {
   align-items: start;
+}
+.shadowcity .neon-input {
+  color: #ff005d;
+}
+.shadowcity .action-buttons > button {
+  margin-left: 2px;
+  margin-right: 2px;
 }
 .shadowcity .single-feature-container {
   border: 1px solid #ff005d;

@@ -65,7 +65,8 @@
         "weapon": "Weapon",
         "npcAttack": "NPC Attack",
         "npcFeature": "NPC Feature",
-        "proficiency": "Proficiency"
+        "proficiency": "Proficiency",
+        "armor": "Armor"
       }
     }
 }

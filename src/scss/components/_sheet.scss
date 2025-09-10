@@ -58,6 +58,8 @@ fieldset {
     font-family: $font-primary;
     border-bottom: 1px solid $c-neon;
     font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .left-half{
@@ -71,4 +73,15 @@ fieldset {
 
 .character-main-view{
     align-items: start;
+}
+
+.neon-input{
+    color: $c-neon;
+}
+
+.action-buttons{
+    > button{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
 }
