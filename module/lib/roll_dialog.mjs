@@ -75,9 +75,12 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
     const form = button.form;
     const formula = applyAdvantageDisadvantage(form.formula.value,advantage_modifier);
     const rollLabel = form.label.value;
-    const difficulty = parseInt(form.difficulty.value) || 0;
+    let difficulty = 0;
+    if(form.difficulty){
+        difficulty = parseInt(form.difficulty.value);
+    }
 
-    console.log(formula);
+    
     const diceRoll = new Roll(formula, actorRollData);
     await diceRoll.evaluate();
     addShowDicePromise(dicePromises, diceRoll);
