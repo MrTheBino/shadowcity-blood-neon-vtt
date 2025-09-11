@@ -11,7 +11,7 @@ export default class ShadowCityNpcAttack extends ShadowCityItemBase {
     schema.damage = new fields.StringField({ required: true, blank: true });
     schema.range = new fields.StringField({ required: true, blank: true });
     schema.numAttacks = new fields.NumberField({ required: true, nullable: false, initial: 1, min: 0 });
-    schema.attackBonus = new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0 });
+    schema.attackBonus = new fields.NumberField({ required: true, nullable: false, initial: 0 });
     schema.criticalMultiplier = new fields.NumberField({ required: true, nullable: false, initial: 2, min: 0 });
 
     return schema;

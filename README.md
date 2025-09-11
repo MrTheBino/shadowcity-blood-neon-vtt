@@ -4,6 +4,8 @@
 
 Inoffical system implementation of [ShadowCity Blood & Neon](https://www.drivethrurpg.com/de/product/521203/shadowcity-blood-and-neon) by Chubby Funster
 
+**ShadowCity Blood & Neon: A gothic punk roleplaying game with a ShadowDark-inspired approach that throws players into instant action and drama.**
+
 No rule texts, items etc are implemented in the system.
 
 ## Manifest-URL for manual installation of the system

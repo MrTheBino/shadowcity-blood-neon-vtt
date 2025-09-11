@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.2
+  - fixed npc bloodpoints
+  - fixed npc negative attack modifier
+
 ## 0.2.1
  - added calculation of gear slots based on carried money
  - added initiative rolls based on quickness modifier
