@@ -12,6 +12,7 @@ import { SHADOWCITY } from './helpers/config.mjs';
 // Import DataModel classes
 import * as models from './data/_module.mjs';
 import {abilityModifier} from './lib/util.mjs';
+import { ShadowCityCombat } from './lib/combat.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -65,6 +66,8 @@ Hooks.once('init', function () {
     proficiency: models.ShadowCityProficiency,
     armor: models.ShadowCityArmor
   }
+
+  CONFIG.Combat.documentClass = ShadowCityCombat;
 
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1
+ - added calculation of gear slots based on carried money
+ - added initiative rolls based on quickness modifier
+  
 ## 0.2.0
  - defense is per default now 10
  - added handling of natural 20 and natural 1

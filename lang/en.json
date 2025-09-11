@@ -18,6 +18,7 @@
       "RollNormal": "Normal",
       "RollAdvantage": "Advantage",
       "RollDisadvantage": "Disadvantage",
+      "initiativeRoll": "Initiative Roll",
       "WeaponProperties":{
         "automatic": "Automatic",
         "cloud": "Cloud",

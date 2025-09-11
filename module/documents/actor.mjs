@@ -60,8 +60,8 @@ export class ShadowCityActor extends Actor {
         else if (i.type === 'weapon') {
           this.usedGearSlots += i.system.gearSlots * i.system.quantity;
         }
-        else if(i.type == "armor"){
-          if(i.system.mounted){
+        else if (i.type == "armor") {
+          if (i.system.mounted) {
             this.usedGearSlots += i.system.gearSlots;
             this.defenseCalculated += i.system.defense;
           }
@@ -69,7 +69,15 @@ export class ShadowCityActor extends Actor {
       }
     }
 
-    
+    // calculated money gear slots
+    if (this.system.money) {
+      let t = parseInt(this.system.money / 500);
+      if (t > 1) {
+        this.usedGearSlots += t - 1;
+      }
+    }
+
+
   }
 
   /**
