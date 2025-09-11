@@ -213,11 +213,16 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
     static async #handleBloodHealing(event, element) {
         event.preventDefault();
         if(this.actor.system.bloodpoints.value <= 0){
+             ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: game.i18n.format("SHADOWCITY.ChatMessages.BloodHealingNotEnoughBP", {bloodpointsRemaining: this.actor.system.bloodpoints.value})
+            });
             return;
         }
 
         const proceed = await foundry.applications.api.DialogV2.confirm({
-            content: `As a free action, a vampire can expend 1 BP to heal 1d6 HP. You can only do this once per round. You want to heal now?`,
+            content: game.i18n.format("SHADOWCITY.Dialogs.ConfirmQuestions.BloodHealing"),
             rejectClose: false,
             modal: true
         });
@@ -233,7 +238,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             ChatMessage.create({
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: `Blood Healing: Healed ${diceRoll.total} HP, spending 1 BP. ${this.actor.system.bloodpoints.value} BP remaining.`
+                content: game.i18n.format("SHADOWCITY.ChatMessages.UsedBloodHealing", {bloodpointsRemaining: this.actor.system.bloodpoints.value, healedAmount: diceRoll.total, bloodpointsUsedNight: this.actor.system.bloodpoints.used})
             });
         }
     }
@@ -265,6 +270,15 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
         const disciplineId = element.dataset.itemId;
         const discipline = this.actor.items.get(disciplineId);
 
+        if(this.actor.system.bloodpoints.value - discipline.system.bloodpoints < 0){
+            ChatMessage.create({
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: game.i18n.format("SHADOWCITY.ChatMessages.UsedDisciplineNotEnoughBP", {disciplineName: discipline.name, disciplineBloodpoints: discipline.system.bloodpoints, bloodpointsRemaining: this.actor.system.bloodpoints.value})
+            });
+            return;
+        }
+
         const proceed = await foundry.applications.api.DialogV2.confirm({
             content: `Do you want to use ${discipline.name} for ${discipline.system.bloodpoints} bloodpoints?`,
             rejectClose: false,
@@ -277,7 +291,7 @@ export class ShadowCityCharacterSheetV2 extends ShadowCityActorSheetV2 {
             ChatMessage.create({
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: `Used discipline ${discipline.name}, spending ${discipline.system.bloodpoints} BP. ${this.actor.system.bloodpoints.value} BP remaining. ${this.actor.system.bloodpoints.used} BP used this night.`
+                content: game.i18n.format("SHADOWCITY.ChatMessages.UsedDiscipline", {disciplineName: discipline.name, disciplineBloodpoints: discipline.system.bloodpoints, bloodpointsRemaining: this.actor.system.bloodpoints.value, bloodpointsUsedNight: this.actor.system.bloodpoints.used})
             });
         }
     }

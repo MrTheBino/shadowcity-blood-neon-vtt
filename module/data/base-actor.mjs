@@ -12,7 +12,7 @@ export default class ShadowCityActorBase extends ShadowCityDataModel {
       max: new fields.NumberField({ ...requiredInteger, initial: 10 })
     });
 
-    schema.defense = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
+    schema.defense = new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 });
     schema.biography = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
 
     return schema;

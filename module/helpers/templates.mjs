@@ -15,6 +15,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/shared/weapon-properties-descriptor.hbs',
     'systems/shadowcity-blood-neon-vtt/templates/shared/move-select-partial.hbs',
+    'systems/shadowcity-blood-neon-vtt/templates/chat/_critical-hit-or-miss-partial.hbs',
 
     // Item partials
     'systems/shadowcity-blood-neon-vtt/templates/item/parts/item-effects.hbs',

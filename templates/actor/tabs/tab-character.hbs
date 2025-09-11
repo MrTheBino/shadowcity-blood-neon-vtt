@@ -41,26 +41,26 @@
             <div class="abilities-section">
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='awareness'
-                    label='Awareness' value=system.abilities.awareness.value ability=system.abilities.awareness
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.awareness') value=system.abilities.awareness.value ability=system.abilities.awareness
                     mod_value=system.abilities.awareness.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='physique'
-                    label='Physique' value=system.abilities.physique.value ability=system.abilities.physique
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.physique') value=system.abilities.physique.value ability=system.abilities.physique
                     mod_value=system.abilities.physique.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='cognition'
-                    label='Cognition' value=system.abilities.cognition.value ability=system.abilities.cognition
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.cognition') value=system.abilities.cognition.value ability=system.abilities.cognition
                     mod_value=system.abilities.cognition.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='quickness'
-                    label='Quickness' value=system.abilities.quickness.value ability=system.abilities.quickness
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.quickness') value=system.abilities.quickness.value ability=system.abilities.quickness
                     mod_value=system.abilities.quickness.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='magnetism'
-                    label='Magnetism' value=system.abilities.magnetism.value ability=system.abilities.magnetism
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.magnetism') value=system.abilities.magnetism.value ability=system.abilities.magnetism
                     mod_value=system.abilities.magnetism.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='willpower'
-                    label='Willpower' value=system.abilities.willpower.value ability=system.abilities.willpower
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.willpower') value=system.abilities.willpower.value ability=system.abilities.willpower
                     mod_value=system.abilities.willpower.mod_value}}
                 </div>
             </div>
@@ -170,15 +170,13 @@
         <div class="flexrow action-buttons">
             <button data-action="rollFrenzyCheck" class="roll-button"><img
                     src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
-                    height="16px" />Frenzy</button>
+                    height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.frenzy"}}</button>
             <button data-action="rollExpendedFrenzyCheck" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt="" height="16px" />Expended
-                Frenzy</button>
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.expendedFrenzy"}}</button>
             <button data-action="clickRiseAtSundown" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-sundown.svg" alt="" height="16px" />Rise At
-                Sundown</button>
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-sundown.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.riseAtSundown"}}</button>
             <button data-action="clickBloodHealing" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodheal.svg" alt="" height="16px" />Blood Healing</button>
+                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodheal.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.bloodHealing"}}</button>
         </div>
     </fieldset>
 </section>

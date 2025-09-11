@@ -30,6 +30,20 @@
         "subdual": "Subdual",
         "suppressing": "Suppressing",
         "twohanded": "Two-Handed"
+      },
+      "Buttons": {
+        "frenzy": "Frenzy",
+        "expendedFrenzy": "Expended Frenzy",
+        "riseAtSundown": "Rise at Sundown",
+        "bloodHealing": "Blood Healing"
+      },
+      "Abilities":{
+        "awareness": "Awareness",
+        "physique": "Physique",
+        "cognition": "Cognition",
+        "quickness": "Quickness",
+        "magnetism": "Magnetism",
+        "willpower": "Willpower"
       }
     },
     "WeaponProperties": {
@@ -44,8 +58,18 @@
       "subdual": "Subdual: This type of weapon will knock a mortal unconscious at zero HP instead of triggering a death timer. They wake up in 3d6 rounds.",
       "suppressing": "Suppressing: This type of weapon always has a suppressive effect when it is fired at a target (no special action required).",
       "twohanded": "Two-Handed: This type of weapon can only be used with both hands and your full attention."
+    },
+    "ChatMessages":{
+      "UsedDiscipline": "Used discipline {disciplineName}, spending {disciplineBloodpoints} BP. {bloodpointsRemaining} BP remaining. {bloodpointsUsedNight} BP used this night.",
+      "UsedDisciplineNotEnoughBP": "Not enough bloodpoints to use the discipline {disciplineName}. {bloodpointsRemaining} BP remaining, but the discipline requires {disciplineBloodpoints} BP.",
+      "BloodHealingNotEnoughBP": "Blood Healing: Not enough bloodpoints to heal. You have {bloodpointsRemaining} BP remaining, but need at least 1 BP to heal.",
+      "UsedBloodHealing": "Blood Healing: Healed {healedAmount} HP, spending 1 BP. {bloodpointsRemaining} BP remaining. {bloodpointsUsedNight} BP used this night."
+    },
+    "Dialogs":{
+      "ConfirmQuestions":{
+        "BloodHealing": "As a free action, a vampire can expend 1 BP to heal 1d6 HP. You can only do this once per round. You want to heal now?"
+      }
     }
-    
   },
   "TYPES": {
       "Actor": {

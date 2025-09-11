@@ -19,6 +19,27 @@ function applyAdvantageDisadvantage(roll, advantage_modifier) {
     return roll
 }
 
+function checkCriticalMissOrHit(roll){
+    if(roll.terms.length > 0 && roll.terms[0].results){
+        for(let i = 0; i < roll.terms[0].results.length; i++){
+            if(roll.terms[0].results[i].active == false) continue;
+            // Check for advantage/disadvantage and see if any die is a natural 1 or natural 20
+            const dieResult = roll.terms[0].results[i].result;
+            // Check for a natural 1 or natural 20
+
+            if(dieResult === 1){
+                // Natural 1
+                return 1;
+            }
+            if(dieResult === 20){
+                // Natural 20
+                return 20;
+            }
+        }
+    }
+    return 0;
+}
+
 export async function rollDialogV1(actor, formula, label,difficulty = 0) {
     const cardTitle = label;
     if(parseInt(formula) < 0){
@@ -85,7 +106,8 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
     await diceRoll.evaluate();
     addShowDicePromise(dicePromises, diceRoll);
     await Promise.all(dicePromises);
-
+    
+    let checkCriticalMissOrHitResult = checkCriticalMissOrHit(diceRoll);
     let rollRenderedHTML = await diceRoll.render();
 
     let isSuccess = false;
@@ -95,7 +117,7 @@ async function rollDialogV1Callback(event, button, dialog, actor,advantage_modif
 
     const html = await foundry.applications.handlebars.renderTemplate(
         "systems/shadowcity-blood-neon-vtt/templates/chat/roll-result.hbs",
-        { roll: diceRoll, label: rollLabel, rollRenderedHTML:rollRenderedHTML, isSuccess:isSuccess, difficulty: difficulty }
+        { roll: diceRoll, label: rollLabel, rollRenderedHTML:rollRenderedHTML, isSuccess:isSuccess, difficulty: difficulty, checkCriticalMissOrHitResult: checkCriticalMissOrHitResult }
     );
 
     ChatMessage.create({
@@ -169,7 +191,7 @@ async function rollWeaponDialogV1Callback(event, button, dialog, actor, advantag
     const weapon = actor.items.get(weaponId);
     const selectedAbility = form.ability.value;
     const modifier = parseInt(form.modifier.value) || 0;
-    const damageFormula = form.damageFormula.value;
+    let damageFormula = form.damageFormula.value;
     const humanityAttackBonus = parseInt(form.humanityAttackBonus.value) || 0;
     let dicePromises = [];
     const actorRollData = actor.getRollData();
@@ -184,6 +206,10 @@ async function rollWeaponDialogV1Callback(event, button, dialog, actor, advantag
     await diceRoll.evaluate();
     addShowDicePromise(dicePromises, diceRoll);
 
+    let checkCriticalMissOrHitResult = checkCriticalMissOrHit(diceRoll);
+    if(checkCriticalMissOrHitResult == 20){
+        damageFormula = damageFormula + "*2";
+    }
     const damageRoll = new Roll(damageFormula, actorRollData);
     await damageRoll.evaluate();
     addShowDicePromise(dicePromises, damageRoll);
@@ -196,7 +222,7 @@ async function rollWeaponDialogV1Callback(event, button, dialog, actor, advantag
 
     const html = await foundry.applications.handlebars.renderTemplate(
         "systems/shadowcity-blood-neon-vtt/templates/chat/weapon-roll-result.hbs",
-        { roll: diceRoll, label: weapon.name, rollRenderedHTML:rollRenderedHTML, ability:selectedAbility, weapon: weapon, rollDamageRenderedHTML: rollDamageRenderedHTML }
+        { roll: diceRoll, label: weapon.name, rollRenderedHTML:rollRenderedHTML, ability:selectedAbility, weapon: weapon, rollDamageRenderedHTML: rollDamageRenderedHTML,checkCriticalMissOrHitResult: checkCriticalMissOrHitResult }
     );
     ChatMessage.create({
         content: html,
@@ -252,7 +278,7 @@ async function rollNpcAttackV1Callback(event, button, dialog, actor, advantage_m
     const attackId = form.attackId.value;
     const attack = actor.items.get(attackId);
     const modifier = parseInt(form.modifier.value) || 0;
-    const damageFormula = form.damageFormula.value;
+    let damageFormula = form.damageFormula.value;
     let dicePromises = [];
     const actorRollData = actor.getRollData();
 
@@ -267,19 +293,25 @@ async function rollNpcAttackV1Callback(event, button, dialog, actor, advantage_m
     await diceRoll.evaluate();
     addShowDicePromise(dicePromises, diceRoll);
 
+    let checkCriticalMissOrHitResult = checkCriticalMissOrHit(diceRoll);
+    if(checkCriticalMissOrHitResult == 20){
+        damageFormula = damageFormula + "*2";
+    }
+
     const damageRoll = new Roll(damageFormula, actorRollData);
     await damageRoll.evaluate();
     addShowDicePromise(dicePromises, damageRoll);
 
-    
     await Promise.all(dicePromises);
+
+    
 
     let rollRenderedHTML = await diceRoll.render();
     let rollDamageRenderedHTML = await damageRoll.render();
 
     const html = await foundry.applications.handlebars.renderTemplate(
         "systems/shadowcity-blood-neon-vtt/templates/chat/npc-attack-roll-result.hbs",
-        { roll: diceRoll, label: attack.name, rollRenderedHTML:rollRenderedHTML, attack: attack, rollDamageRenderedHTML: rollDamageRenderedHTML }
+        { roll: diceRoll, label: attack.name, rollRenderedHTML:rollRenderedHTML, attack: attack, rollDamageRenderedHTML: rollDamageRenderedHTML,checkCriticalMissOrHitResult: checkCriticalMissOrHitResult }
     );
     ChatMessage.create({
         content: html,

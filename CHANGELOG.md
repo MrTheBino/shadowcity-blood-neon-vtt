@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.2.0
+ - defense is per default now 10
+ - added handling of natural 20 and natural 1
+ - handling using disciplines with not enough blood points left
+ - started converting hardcoded texts to language json
+  
 ## 0.1.3
  - added item armor types
  - added extended frenzy button with functionality

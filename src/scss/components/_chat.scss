@@ -2,3 +2,27 @@
     text-align: center;
     font-weight: bold;
 }
+
+.critical-hit{
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.critical-miss{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.chat-message{
+    background: black;
+    border: 1px solid $c-neon;
+    color: white;
+}
+
+.dice-formula{
+    background-color: $c-neon;
+}
