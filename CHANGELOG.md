@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.3
+  - fixed npc attack critical damage multiplier
+  - rearranged npc sheet for better usability
+  - usability improvements for weapon sheets
+  
 ## 0.2.2
   - fixed npc bloodpoints
   - fixed npc negative attack modifier

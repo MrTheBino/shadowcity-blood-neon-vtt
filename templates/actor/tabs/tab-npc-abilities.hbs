@@ -1,9 +1,15 @@
 <section class="tab {{tabs.abilities.id}} {{tabs.abilities.cssClass}} scrollable" id="abilities"
     data-tab="{{tabs.abilities.id}}" data-group="{{tabs.abilities.group}}">
 
-    <div class="grid grid-2col">
+    <div class="flexrow npc-sheet-abilities">
         <div class="left-half">
             <div class="grid grid-2col">
+                <div class="ability-container">
+                    <label class="ability-label">Defense</label>
+                    <div class="grid grid-2col">
+                        <input type="number" name="system.defense" value="{{system.defense}}" data-dtype="Number" />
+                    </div>
+                </div>
                 <div class="ability-container">
                     <label class="ability-label"> Hit Points</label>
                     <div class="grid grid-2col">
@@ -13,6 +19,9 @@
                             data-dtype="Number" />
                     </div>
                 </div>
+
+            </div>
+            <div class="grid grid-2col">
                 <div class="ability-container">
                     <label class="ability-label">Bloodpoints</label>
                     <div class="grid grid-2col">
@@ -20,14 +29,6 @@
                             data-dtype="Number" />
                         <input type="number" name="system.bloodpoints.max" value="{{system.bloodpoints.max}}"
                             data-dtype="Number" />
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-2col">
-                <div class="ability-container">
-                    <label class="ability-label">Defense</label>
-                    <div class="grid grid-2col">
-                        <input type="number" name="system.defense" value="{{system.defense}}" data-dtype="Number" />
                     </div>
                 </div>
                 <div class="ability-container">
@@ -69,6 +70,12 @@
                     mod_value=system.abilities.willpower.mod_value}}
                 </div>
             </div>
+            <fieldset>
+                <legend>Move</legend>
+                {{> "systems/shadowcity-blood-neon-vtt/templates/shared/move-select-partial.hbs" name="system.move"
+                value=system.move
+                nameExtra="system.moveExtra" valueExtra=system.moveExtra}}
+            </fieldset>
         </div>
         <div class="right-half">
             <fieldset>
@@ -106,7 +113,7 @@
 
             <fieldset>
                 <legend>Habits</legend>
-                <textarea name="system.habits" rows="4" cols="36" >{{system.habits}}</textarea>
+                <textarea name="system.habits" rows="4" cols="36">{{system.habits}}</textarea>
             </fieldset>
             <fieldset>
                 <legend>Features <a class='item-control item-create' data-action="createItem" data-type='npcFeature'>
@@ -140,11 +147,6 @@
                     </li>
                     {{/each}}
                 </ol>
-            </fieldset>
-            <fieldset>
-                <legend>Move</legend>
-                {{> "systems/shadowcity-blood-neon-vtt/templates/shared/move-select-partial.hbs" name="system.move" value=system.move
-                nameExtra="system.moveExtra" valueExtra=system.moveExtra}}
             </fieldset>
         </div>
     </div>

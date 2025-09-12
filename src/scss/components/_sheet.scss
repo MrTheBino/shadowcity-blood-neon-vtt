@@ -71,6 +71,13 @@ fieldset {
     flex-grow: 1.5;
 }
 
+.npc-sheet-abilities{
+    align-items: start;
+    
+    .right-half{
+        flex-grow: 1.75;
+    }
+}
 .character-main-view{
     align-items: start;
 }

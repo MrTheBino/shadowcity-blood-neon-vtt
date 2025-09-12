@@ -295,7 +295,7 @@ async function rollNpcAttackV1Callback(event, button, dialog, actor, advantage_m
 
     let checkCriticalMissOrHitResult = checkCriticalMissOrHit(diceRoll);
     if(checkCriticalMissOrHitResult == 20){
-        damageFormula = damageFormula + "*2";
+        damageFormula = damageFormula + `*${attack.system.criticalMultiplier}`;
     }
 
     const damageRoll = new Roll(damageFormula, actorRollData);

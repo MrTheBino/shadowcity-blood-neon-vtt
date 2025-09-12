@@ -18,11 +18,13 @@
         </div>
         <div>
             <label>Range</label>
-            {{> "systems/shadowcity-blood-neon-vtt/templates/shared/ranged-select-dropdown.hbs" name="system.range" value=system.range}}
+            {{> "systems/shadowcity-blood-neon-vtt/templates/shared/ranged-select-dropdown.hbs" name="system.range"
+            value=system.range}}
         </div>
         <div>
             <label>Ability</label>
-            {{> "systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs" name="system.ability" value=system.ability}}
+            {{> "systems/shadowcity-blood-neon-vtt/templates/shared/ability-select-dropdown.hbs" name="system.ability"
+            value=system.ability}}
         </div>
         <div>
             <label>Ammunition</label>
@@ -32,36 +34,50 @@
                 <input type="text" name="system.ammo.max" value="{{system.ammo.max}}" />
             </div>
         </div>
-         <div>
+        <div>
             <label>Illegal</label>
-            <input type="checkbox" {{#if item.system.illegal}} checked{{/if}}
-                    name="system.illegal">
+            <div class="flexrow">
+                <input type="checkbox" {{#if item.system.illegal}} checked{{/if}} name="system.illegal">
+            </div>
         </div>
     </div>
     <fieldset>
         <legend>Properties</legend>
-        <ul class="grid grid-3col properties-list">
-            <li><input type="checkbox" {{#if item.system.properties.automatic}} checked{{/if}}
+        <ul class="grid grid-5col properties-list">
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.automatic")
+                }}"><input type="checkbox" {{#if item.system.properties.automatic}} checked{{/if}}
                     name="system.properties.automatic">{{localize 'SHADOWCITY.LABELS.WeaponProperties.automatic'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.cloud}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.cloud") }}">
+                <input type="checkbox" {{#if item.system.properties.cloud}} checked{{/if}}
                     name="system.properties.cloud">{{localize 'SHADOWCITY.LABELS.WeaponProperties.cloud'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.concealed}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.concealed")
+                }}"><input type="checkbox" {{#if item.system.properties.concealed}} checked{{/if}}
                     name="system.properties.concealed">{{localize 'SHADOWCITY.LABELS.WeaponProperties.concealed'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.concussion}} checked{{/if}}
-                    name="system.properties.concussion">{{localize 'SHADOWCITY.LABELS.WeaponProperties.concussion'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.flame}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.concussion")
+                }}"><input type="checkbox" {{#if item.system.properties.concussion}} checked{{/if}}
+                    name="system.properties.concussion">{{localize 'SHADOWCITY.LABELS.WeaponProperties.concussion'}}
+            </li>
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.flame") }}">
+                <input type="checkbox" {{#if item.system.properties.flame}} checked{{/if}}
                     name="system.properties.flame">{{localize 'SHADOWCITY.LABELS.WeaponProperties.flame'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.heavy}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.heavy") }}">
+                <input type="checkbox" {{#if item.system.properties.heavy}} checked{{/if}}
                     name="system.properties.heavy">{{localize 'SHADOWCITY.LABELS.WeaponProperties.heavy'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.scope}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.scope") }}">
+                <input type="checkbox" {{#if item.system.properties.scope}} checked{{/if}}
                     name="system.properties.scope">{{localize 'SHADOWCITY.LABELS.WeaponProperties.scope'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.splash}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.splash") }}">
+                <input type="checkbox" {{#if item.system.properties.splash}} checked{{/if}}
                     name="system.properties.splash">{{localize 'SHADOWCITY.LABELS.WeaponProperties.splash'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.subdual}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.subdual")
+                }}"><input type="checkbox" {{#if item.system.properties.subdual}} checked{{/if}}
                     name="system.properties.subdual">{{localize 'SHADOWCITY.LABELS.WeaponProperties.subdual'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.suppressing}} checked{{/if}}
-                    name="system.properties.suppressing">{{localize 'SHADOWCITY.LABELS.WeaponProperties.suppressing'}}</li>
-            <li><input type="checkbox" {{#if item.system.properties.twohanded}} checked{{/if}}
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.suppressing")
+                }}"><input type="checkbox" {{#if item.system.properties.suppressing}} checked{{/if}}
+                    name="system.properties.suppressing">{{localize 'SHADOWCITY.LABELS.WeaponProperties.suppressing'}}
+            </li>
+            <li class="tooltip-hover" data-tooltip-html="{{ localize (concat " SHADOWCITY.WeaponProperties.twohanded")
+                }}"><input type="checkbox" {{#if item.system.properties.twohanded}} checked{{/if}}
                     name="system.properties.twohanded">{{localize 'SHADOWCITY.LABELS.WeaponProperties.twohanded'}}</li>
         </ul>
     </fieldset>

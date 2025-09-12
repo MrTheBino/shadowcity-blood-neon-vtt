@@ -484,6 +484,12 @@
   margin-left: 5px;
   flex-grow: 1.5;
 }
+.shadowcity .npc-sheet-abilities {
+  align-items: start;
+}
+.shadowcity .npc-sheet-abilities .right-half {
+  flex-grow: 1.75;
+}
 .shadowcity .character-main-view {
   align-items: start;
 }
