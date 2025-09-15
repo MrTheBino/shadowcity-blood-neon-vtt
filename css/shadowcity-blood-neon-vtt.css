@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+.expandable.closed {
+  display: none !important;
+}
+
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
@@ -497,14 +501,18 @@
   color: #ff005d;
 }
 .shadowcity .action-buttons > button {
-  margin-left: 2px;
-  margin-right: 2px;
+  margin: 2px;
+}
+.shadowcity .npc-item-description {
+  background: #302831;
+  padding: 2px;
+  text-align: left;
+  width: 100%;
 }
 .shadowcity .single-feature-container {
   border: 1px solid #ff005d;
   border-radius: 5px;
-  margin-bottom: 5px;
-  min-height: 60px;
+  min-height: 74px;
 }
 .shadowcity .single-feature-container .feature-header {
   font-weight: bold;

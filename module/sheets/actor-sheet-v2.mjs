@@ -101,7 +101,23 @@ export class ShadowCityActorSheetV2 extends HandlebarsApplicationMixin(ActorShee
             tooltip.addEventListener("mouseleave", event => this.handleTooltipMouseLeave(event));
         }*/
 
-            const itemEditableStatsElements = this.element.querySelectorAll('.item-editable-stat')
+        const expandableTriggerElements = this.element.querySelectorAll('.expandable-trigger');
+        for (const trigger of expandableTriggerElements) {
+            trigger.addEventListener("click", event => {
+                const targetId = trigger.dataset.expandableTarget;
+                const target = this.element.querySelector(`[data-expandable-id="${targetId}"]`);
+                if (target.classList.contains('closed')) {
+                    target.classList.remove('closed'); 
+                    target.classList.add('open');
+                }
+                else {
+                    target.classList.remove('open'); 
+                    target.classList.add('closed');
+                }
+            });
+        }
+        
+        const itemEditableStatsElements = this.element.querySelectorAll('.item-editable-stat')
         for (const input of itemEditableStatsElements) {
             input.addEventListener("change", event => this.handleItemStatChanged(event))
         }

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.2.4
+  - improved character and npc sheets
+
 ## 0.2.3
   - fixed npc attack critical damage multiplier
   - rearranged npc sheet for better usability

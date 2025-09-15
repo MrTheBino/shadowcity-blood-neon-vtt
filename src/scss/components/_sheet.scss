@@ -88,7 +88,13 @@ fieldset {
 
 .action-buttons{
     > button{
-        margin-left: 2px;
-        margin-right: 2px;
+        margin: 2px;
     }
+}
+
+.npc-item-description{
+    background: #302831;
+    padding: 2px;
+    text-align: left;
+    width: 100%;
 }

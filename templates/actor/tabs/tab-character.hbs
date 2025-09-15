@@ -41,27 +41,59 @@
             <div class="abilities-section">
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='awareness'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.awareness') value=system.abilities.awareness.value ability=system.abilities.awareness
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.awareness') value=system.abilities.awareness.value
+                    ability=system.abilities.awareness
                     mod_value=system.abilities.awareness.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='physique'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.physique') value=system.abilities.physique.value ability=system.abilities.physique
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.physique') value=system.abilities.physique.value
+                    ability=system.abilities.physique
                     mod_value=system.abilities.physique.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='cognition'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.cognition') value=system.abilities.cognition.value ability=system.abilities.cognition
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.cognition') value=system.abilities.cognition.value
+                    ability=system.abilities.cognition
                     mod_value=system.abilities.cognition.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='quickness'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.quickness') value=system.abilities.quickness.value ability=system.abilities.quickness
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.quickness') value=system.abilities.quickness.value
+                    ability=system.abilities.quickness
                     mod_value=system.abilities.quickness.mod_value}}
                 </div>
                 <div class="grid grid-2col">
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='magnetism'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.magnetism') value=system.abilities.magnetism.value ability=system.abilities.magnetism
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.magnetism') value=system.abilities.magnetism.value
+                    ability=system.abilities.magnetism
                     mod_value=system.abilities.magnetism.mod_value}}
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/ability-partial.hbs" key='willpower'
-                    label=(localize 'SHADOWCITY.LABELS.Abilities.willpower') value=system.abilities.willpower.value ability=system.abilities.willpower
+                    label=(localize 'SHADOWCITY.LABELS.Abilities.willpower') value=system.abilities.willpower.value
+                    ability=system.abilities.willpower
                     mod_value=system.abilities.willpower.mod_value}}
+                </div>
+                <div class="">
+                    <div class="single-feature-container">
+                        <div class="feature-header">Blood Boost</div>
+                        <select class="bloodboost-select">
+                            <option value="none">None</option>
+                            <option value="awareness" {{#if system.abilities.awareness.bloodboost}}selected{{/if}}>
+                                Awareness
+                            </option>
+                            <option value="physique" {{#if system.abilities.physique.bloodboost}}selected{{/if}}>
+                                Physique
+                            </option>
+                            <option value="cognition" {{#if system.abilities.cognition.bloodboost}}selected{{/if}}>
+                                Cognition
+                            </option>
+                            <option value="quickness" {{#if system.abilities.quickness.bloodboost}}selected{{/if}}>
+                                Quickness
+                            </option>
+                            <option value="magnetism" {{#if system.abilities.magnetism.bloodboost}}selected{{/if}}>
+                                Magnetism
+                            </option>
+                            <option value="willpower" {{#if system.abilities.willpower.bloodboost}}selected{{/if}}>
+                                Willpower
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,30 +155,10 @@
                     {{> "systems/shadowcity-blood-neon-vtt/templates/actor/parts/single-feature.hbs" object=feeding
                     label='Feeding Habits'}}
                 </div>
-            </div>
-            <div class="grid grid-2col">
                 <div class="single-feature-container">
                     <div class="feature-header">BP used this night</div>
                     <input type="number" name="system.bloodpoints.used" value="{{system.bloodpoints.used}}"
                         data-dtype="Number" />
-                </div>
-                <div class="single-feature-container">
-                    <div class="feature-header">Blood Boost</div>
-                    <select class="bloodboost-select">
-                        <option value="none">None</option>
-                        <option value="awareness" {{#if system.abilities.awareness.bloodboost}}selected{{/if}}>Awareness
-                        </option>
-                        <option value="physique" {{#if system.abilities.physique.bloodboost}}selected{{/if}}>Physique
-                        </option>
-                        <option value="cognition" {{#if system.abilities.cognition.bloodboost}}selected{{/if}}>Cognition
-                        </option>
-                        <option value="quickness" {{#if system.abilities.quickness.bloodboost}}selected{{/if}}>Quickness
-                        </option>
-                        <option value="magnetism" {{#if system.abilities.magnetism.bloodboost}}selected{{/if}}>Magnetism
-                        </option>
-                        <option value="willpower" {{#if system.abilities.willpower.bloodboost}}selected{{/if}}>Willpower
-                        </option>
-                    </select>
                 </div>
             </div>
             <div class="single-feature-container">
@@ -163,20 +175,29 @@
                     {{/each}}
                 </div>
             </div>
+            <fieldset>
+                <legend>Checks / Actions / etc.</legend>
+                <div class="flexrow action-buttons">
+                    <button data-action="rollFrenzyCheck" class="roll-button"><img
+                            src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
+                            height="16px" />{{localize
+                        "SHADOWCITY.LABELS.Buttons.frenzy"}}</button>
+                    <button data-action="rollExpendedFrenzyCheck" class="roll-button"><img
+                            src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
+                            height="16px" />{{localize
+                        "SHADOWCITY.LABELS.Buttons.expendedFrenzy"}}</button>
+                </div>
+                <div class="flexrow action-buttons">
+                    <button data-action="clickRiseAtSundown" class="roll-button"><img
+                            src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-sundown.svg" alt=""
+                            height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.riseAtSundown"}}</button>
+                    <button data-action="clickBloodHealing" class="roll-button"><img
+                            src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodheal.svg" alt=""
+                            height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.bloodHealing"}}</button>
+                </div>
+
+            </fieldset>
         </div>
     </div>
-    <fieldset>
-        <legend>Checks / Actions / etc.</legend>
-        <div class="flexrow action-buttons">
-            <button data-action="rollFrenzyCheck" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt=""
-                    height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.frenzy"}}</button>
-            <button data-action="rollExpendedFrenzyCheck" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-mad.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.expendedFrenzy"}}</button>
-            <button data-action="clickRiseAtSundown" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-sundown.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.riseAtSundown"}}</button>
-            <button data-action="clickBloodHealing" class="roll-button"><img
-                    src="systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodheal.svg" alt="" height="16px" />{{localize "SHADOWCITY.LABELS.Buttons.bloodHealing"}}</button>
-        </div>
-    </fieldset>
+
 </section>
