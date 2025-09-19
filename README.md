@@ -1,6 +1,6 @@
 # ShadowCity Blood & Neon FoundryVTT System
 
-![Foundry v13](https://img.shields.io/badge/foundry-v13-green)
+![Foundry v13](https://img.shields.io/badge/foundry-v13-green) [![Github All Releases](https://img.shields.io/github/downloads/MrTheBino/shadowcity-blood-neon-vtt/total.svg)]()
 
 Inoffical system implementation of [ShadowCity Blood & Neon](https://www.drivethrurpg.com/de/product/521203/shadowcity-blood-and-neon) by Chubby Funster
 
