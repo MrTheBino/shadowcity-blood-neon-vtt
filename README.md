@@ -8,6 +8,8 @@ Inoffical system implementation of [ShadowCity Blood & Neon](https://www.driveth
 
 No rule texts, items etc are implemented in the system.
 
+![ShadowCity Blood & Neon Interface](screenshot.webp "ShadowCity Blood & Neon Interface")
+
 ## Manifest-URL for manual installation of the system
 
     https://github.com/MrTheBino/shadowcity-blood-neon-vtt/releases/latest/download/system.json
